@@ -1,35 +1,28 @@
-import { Film } from "src/films/models/film.model";
-import { Person } from "src/people/models/person.model";
-import { Planet } from "src/planets/models/planet.model";
-import { Species } from "src/species/models/species.model";
-import { Starship } from "src/starships/models/starship.model";
-import { Vehicle } from "src/vehicles/models/vehicle.model";
+export type ResourceName = "films" | "people" | "planets" | "species" | "starships" | "vehicles";
 
-export interface PaginatedResults<T> {
+export interface PaginatedResponse<RName extends ResourceName> {
   count: number;
   next: string | null;
   previous: string | null;
-  results: Array<T>;
+  results: ResourceDto<RName>[];
 }
 
-export type Resource = "films" | "people" | "planets" | "species" | "starships" | "vehicles";
-
-export type MappedResourceModel<T> =
-  T extends "films" ? Film :
-  T extends "people" ? Person :
-  T extends "planets" ? Planet :
-  T extends "species" ? Species :
-  T extends "starships" ? Starship :
-  T extends "vehicles" ? Vehicle :
+export type ResourceDto<RName extends ResourceName> =
+  RName extends "films" ? FilmResourceDto :
+  RName extends "people" ? PersonResourceDto :
+  RName extends "planets" ? PlanetResourceDto :
+  RName extends "species" ? SpeciesResourceDto :
+  RName extends "starships" ? StarshipResourceDto :
+  RName extends "vehicles" ? VehicleResourceDto :
   never;
 
-export interface ResourceMeta {
+export interface ResourceDtoMeta {
   url: string;      // the hypermedia URL of this resource.
   created: string;  // the ISO 8601 date format of the time that this resource was created.
   edited: string;   // the ISO 8601 date format of the time that this resource was edited.
 }
 
-export interface FilmResource extends ResourceMeta {
+export interface FilmResourceDto extends ResourceDtoMeta {
   title: string;          // The title of this film
   episode_id: number;     // The episode number of this film.
   opening_crawl: string;  // The opening paragraphs at the beginning of this film.
@@ -43,7 +36,7 @@ export interface FilmResource extends ResourceMeta {
   planets: string[];      // An array of planet resource URLs that are in this film.
 }
 
-export interface PersonResource extends ResourceMeta {
+export interface PersonResourceDto extends ResourceDtoMeta {
   name: string;         // The name of this person.
   birth_year: string;   // The birth year of the person, using the in-universe standard of BBY or ABY - Before the Battle of Yavin or After the Battle of Yavin. The Battle of Yavin is a battle that occurs at the end of Star Wars episode IV: A New Hope.
   eye_color: string;    // The eye color of this person. Will be "unknown" if not known or "n/a" if the person does not have an eye.
@@ -59,7 +52,7 @@ export interface PersonResource extends ResourceMeta {
   vehicles: string[];   // An array of vehicle resource URLs that this person has piloted.
 }
 
-export interface PlanetResource extends ResourceMeta {
+export interface PlanetResourceDto extends ResourceDtoMeta {
   name: string;             // The name of this planet.
   diameter: string;         // The diameter of this planet in kilometers.
   rotation_period: string;  // The number of standard hours it takes for this planet to complete a single rotation on its axis.
@@ -73,7 +66,7 @@ export interface PlanetResource extends ResourceMeta {
   films: string[];          // An array of Film URL Resources that this planet has appeared in.
 }
 
-export interface SpeciesResource extends ResourceMeta {
+export interface SpeciesResourceDto extends ResourceDtoMeta {
   name: string;             // The name of this species.
   classification: string;   // The classification of this species, such as "mammal" or "reptile".
   designation: string;      // The designation of this species, such as "sentient".
@@ -88,7 +81,7 @@ export interface SpeciesResource extends ResourceMeta {
   films: string[];          // An array of Film URL Resources that this species has appeared in.
 }
 
-export interface StarshipResource extends ResourceMeta {
+export interface StarshipResourceDto extends ResourceDtoMeta {
   name: string;                   // The name of this starship. The common name, such as "Death Star".
   model: string;                  // The model or official name of this starship. Such as "T-65 X-wing" or "DS-1 Orbital Battle Station".
   starship_class: string;         // The class of this starship, such as "Starfighter" or "Deep Space Mobile Battlestation"
@@ -106,7 +99,7 @@ export interface StarshipResource extends ResourceMeta {
   pilots: string[];               // An array of People URL Resources that this starship has been piloted by.
 }
 
-export interface VehicleResource extends ResourceMeta {
+export interface VehicleResourceDto extends ResourceDtoMeta {
   name: string;                   // The name of this vehicle. The common name, such as "Sand Crawler" or "Speeder bike".
   model: string;                  // The model or official name of this vehicle. Such as "All-Terrain Attack Transport".
   vehicle_class: string;          // The class of this vehicle, such as "Wheeled" or "Repulsorcraft".
