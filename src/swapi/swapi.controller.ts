@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { SwapiService } from './swapi.service';
-import { Resource } from './types/common';
+import { Resource } from './types';
 
 @Controller('swapi')
 export class SwapiController {

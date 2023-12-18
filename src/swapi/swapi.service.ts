@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Resource } from './types/common';
+import { Resource } from './types';
 
 @Injectable()
 export class SwapiService {
