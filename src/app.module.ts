@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { SwapiModule } from './swapi/swapi.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { TempResolver } from './temp.resolver';
 
 @Module({
   imports: [
@@ -12,6 +13,6 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
       sortSchema: true,
     }),
   ],
-  providers: [],
+  providers: [TempResolver],
 })
 export class AppModule {}
