@@ -3,7 +3,7 @@ import { PlanetEntity } from 'src/planets/planet.entity';
 import { SpeciesEntity } from 'src/species/species.entity';
 import { StarshipEntity } from 'src/starships/starship.entity';
 import { VehicleEntity } from 'src/vehicles/vehicle.entity';
-import { Column, Entity, ManyToMany, OneToMany, PrimaryColumn } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, PrimaryColumn } from 'typeorm';
 
 @Entity()
 export class FilmEntity {
@@ -28,18 +28,23 @@ export class FilmEntity {
   @Column()
   releaseDate: string;
 
-  @OneToMany(type => SpeciesEntity, species => species.id)
+  @ManyToMany(type => SpeciesEntity, species => species.films)
+  @JoinTable()
   species: SpeciesEntity[];
 
-  @OneToMany(type => StarshipEntity, starship => starship.id)
+  @ManyToMany(type => StarshipEntity, starship => starship.films)
+  @JoinTable()
   starships: StarshipEntity[];
 
-  @OneToMany(type => VehicleEntity, vehicle => vehicle.id)
+  @ManyToMany(type => VehicleEntity, vehicle => vehicle.films)
+  @JoinTable()
   vehicles: VehicleEntity[];
 
-  @OneToMany(type => PersonEntity, person => person.id)
+  @ManyToMany(type => PersonEntity, person => person.films)
+  @JoinTable()
   characters: PersonEntity[];
 
-  @OneToMany(type => PlanetEntity, planet => planet.id)
+  @ManyToMany(type => PlanetEntity, planet => planet.films)
+  @JoinTable()
   planets: PlanetEntity[];
 }

@@ -3,7 +3,7 @@ import { PlanetEntity } from 'src/planets/planet.entity';
 import { SpeciesEntity } from 'src/species/species.entity';
 import { StarshipEntity } from 'src/starships/starship.entity';
 import { VehicleEntity } from 'src/vehicles/vehicle.entity';
-import { Column, Entity, ManyToOne, OneToMany, PrimaryColumn } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryColumn } from 'typeorm';
 
 @Entity()
 export class PersonEntity {
@@ -34,18 +34,21 @@ export class PersonEntity {
   @Column()
   skinColor: string;
 
-  @ManyToOne(type => PlanetEntity, planet => planet.id)
+  @ManyToOne(type => PlanetEntity, planet => planet.residents)
   homeworld: PlanetEntity;
 
-  @OneToMany(type => FilmEntity, film => film.id)
+  @ManyToMany(type => FilmEntity, film => film.characters)
   films: FilmEntity[];
 
-  @OneToMany(type => SpeciesEntity, species => species.id)
+  @ManyToMany(type => SpeciesEntity, species => species.people)
+  @JoinTable()
   species: SpeciesEntity[];
 
-  @OneToMany(type => StarshipEntity, starship => starship.id)
+  @ManyToMany(type => StarshipEntity, starship => starship.pilots)
+  @JoinTable()
   starships: StarshipEntity[];
 
-  @OneToMany(type => VehicleEntity, vehicle => vehicle.id)
+  @ManyToMany(type => VehicleEntity, vehicle => vehicle.pilots)
+  @JoinTable()
   vehicles: VehicleEntity[];
 }

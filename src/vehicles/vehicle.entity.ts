@@ -40,9 +40,9 @@ export class VehicleEntity {
   @Column()
   consumables: string;
 
-  @OneToMany(type => FilmEntity, film => film.id)
+  @ManyToMany(type => FilmEntity, film => film.vehicles)
   films: FilmEntity[];
 
-  @OneToMany(type => PersonEntity, person => person.id)
+  @ManyToMany(type => PersonEntity, person => person.vehicles)
   pilots: PersonEntity[];
 }
