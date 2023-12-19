@@ -2,6 +2,1032 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+"""Cursor for paging through collections"""
+scalar ConnectionCursor
+
+input CursorPaging {
+  """Paginate after opaque cursor"""
+  after: ConnectionCursor
+
+  """Paginate before opaque cursor"""
+  before: ConnectionCursor
+
+  """Paginate first"""
+  first: Int
+
+  """Paginate last"""
+  last: Int
+}
+
+type Film {
+  """An array of people that are in this film."""
+  characters: Person!
+
+  """The name of the director of this film."""
+  director: String!
+
+  """The episode number of this film."""
+  episodeID: Int!
+  id: ID!
+
+  """The opening paragraphs at the beginning of this film."""
+  openingCrawl: String!
+
+  """An array of planets that are in this film."""
+  planets: Planet!
+
+  """The name(s) of the producer(s) of this film. Comma separated."""
+  producer: String!
+
+  """The ISO 8601 date format of film release at original creator country."""
+  releaseDate: String!
+
+  """An array of species that are in this film."""
+  species: Species!
+
+  """An array of starships that are in this film."""
+  starships: Starship!
+
+  """The title of this film."""
+  title: String!
+
+  """An array of vehicles that are in this film."""
+  vehicles: Vehicle!
+}
+
+type FilmConnection {
+  """Array of edges."""
+  edges: [FilmEdge!]!
+
+  """Paging information"""
+  pageInfo: PageInfo!
+}
+
+type FilmEdge {
+  """Cursor for this node."""
+  cursor: ConnectionCursor!
+
+  """The node containing the Film"""
+  node: Film!
+}
+
+input FilmFilter {
+  and: [FilmFilter!]
+  characters: FilmFilterPersonFilter
+  director: StringFieldComparison
+  episodeID: IntFieldComparison
+  id: IDFilterComparison
+  openingCrawl: StringFieldComparison
+  or: [FilmFilter!]
+  planets: FilmFilterPlanetFilter
+  producer: StringFieldComparison
+  releaseDate: StringFieldComparison
+  species: FilmFilterSpeciesFilter
+  starships: FilmFilterStarshipFilter
+  title: StringFieldComparison
+  vehicles: FilmFilterVehicleFilter
+}
+
+input FilmFilterPersonFilter {
+  and: [FilmFilterPersonFilter!]
+  birthYear: StringFieldComparison
+  eyeColor: StringFieldComparison
+  gender: StringFieldComparison
+  hairColor: StringFieldComparison
+  height: StringFieldComparison
+  id: IDFilterComparison
+  mass: StringFieldComparison
+  name: StringFieldComparison
+  or: [FilmFilterPersonFilter!]
+  skinColor: StringFieldComparison
+}
+
+input FilmFilterPlanetFilter {
+  and: [FilmFilterPlanetFilter!]
+  climate: StringFieldComparison
+  diameter: StringFieldComparison
+  gravity: StringFieldComparison
+  id: IDFilterComparison
+  name: StringFieldComparison
+  or: [FilmFilterPlanetFilter!]
+  orbitalPeriod: StringFieldComparison
+  population: StringFieldComparison
+  rotationPeriod: StringFieldComparison
+  surfaceWater: StringFieldComparison
+  terrain: StringFieldComparison
+}
+
+input FilmFilterSpeciesFilter {
+  and: [FilmFilterSpeciesFilter!]
+  averageHeight: StringFieldComparison
+  averageLifespan: StringFieldComparison
+  classification: StringFieldComparison
+  designation: StringFieldComparison
+  eyeColors: StringFieldComparison
+  hairColors: StringFieldComparison
+  id: IDFilterComparison
+  language: StringFieldComparison
+  name: StringFieldComparison
+  or: [FilmFilterSpeciesFilter!]
+  skinColors: StringFieldComparison
+}
+
+input FilmFilterStarshipFilter {
+  MGLT: StringFieldComparison
+  and: [FilmFilterStarshipFilter!]
+  cargoCapacity: StringFieldComparison
+  consumables: StringFieldComparison
+  costInCredits: StringFieldComparison
+  crew: StringFieldComparison
+  hyperdriveRating: StringFieldComparison
+  id: IDFilterComparison
+  length: StringFieldComparison
+  manufacturer: StringFieldComparison
+  maxAtmospheringSpeed: StringFieldComparison
+  model: StringFieldComparison
+  name: StringFieldComparison
+  or: [FilmFilterStarshipFilter!]
+  passengers: StringFieldComparison
+  starshipClass: StringFieldComparison
+}
+
+input FilmFilterVehicleFilter {
+  and: [FilmFilterVehicleFilter!]
+  cargoCapacity: StringFieldComparison
+  consumables: StringFieldComparison
+  costInCredits: StringFieldComparison
+  crew: StringFieldComparison
+  id: IDFilterComparison
+  length: StringFieldComparison
+  manufacturer: StringFieldComparison
+  maxAtmospheringSpeed: StringFieldComparison
+  model: StringFieldComparison
+  name: StringFieldComparison
+  or: [FilmFilterVehicleFilter!]
+  passengers: StringFieldComparison
+  vehicleClass: StringFieldComparison
+}
+
+input FilmSort {
+  direction: SortDirection!
+  field: FilmSortFields!
+  nulls: SortNulls
+}
+
+enum FilmSortFields {
+  director
+  episodeID
+  id
+  openingCrawl
+  producer
+  releaseDate
+  title
+}
+
+input IDFilterComparison {
+  eq: ID
+  gt: ID
+  gte: ID
+  iLike: ID
+  in: [ID!]
+  is: Boolean
+  isNot: Boolean
+  like: ID
+  lt: ID
+  lte: ID
+  neq: ID
+  notILike: ID
+  notIn: [ID!]
+  notLike: ID
+}
+
+input IntFieldComparison {
+  between: IntFieldComparisonBetween
+  eq: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  is: Boolean
+  isNot: Boolean
+  lt: Int
+  lte: Int
+  neq: Int
+  notBetween: IntFieldComparisonBetween
+  notIn: [Int!]
+}
+
+input IntFieldComparisonBetween {
+  lower: Int!
+  upper: Int!
+}
+
+type PageInfo {
+  """The cursor of the last returned record."""
+  endCursor: ConnectionCursor
+
+  """true if paging forward and there are more records."""
+  hasNextPage: Boolean
+
+  """true if paging backwards and there are more records."""
+  hasPreviousPage: Boolean
+
+  """The cursor of the first returned record."""
+  startCursor: ConnectionCursor
+}
+
+type Person {
+  """
+  The birth year of the person, using the in-universe standard of BBY or ABY - Before the Battle of Yavin or After the Battle of Yavin. The Battle of Yavin is a battle that occurs at the end of Star Wars episode IV: A New Hope.
+  """
+  birthYear: String!
+
+  """
+  The eye color of this person. Will be "unknown" if not known or "n/a" if the person does not have an eye.
+  """
+  eyeColor: String!
+
+  """An array of films that this person has been in."""
+  films: Film!
+
+  """
+  The gender of this person. Either "Male", "Female" or "unknown", "n/a" if the person does not have a gender.
+  """
+  gender: String!
+
+  """
+  The hair color of this person. Will be "unknown" if not known or "n/a" if the person does not have hair.
+  """
+  hairColor: String!
+
+  """The height of the person in centimeters"""
+  height: String!
+
+  """A planet that this person was born on or inhabits."""
+  homeworld: Planet!
+  id: ID!
+
+  """The mass of the person in kilograms."""
+  mass: String!
+
+  """The name of this person."""
+  name: String!
+
+  """The skin color of this person."""
+  skinColor: String!
+
+  """An array of species that this person belongs to."""
+  species: Species!
+
+  """An array of starships that this person has piloted."""
+  starships: Starship!
+
+  """An array of vehicles that this person has piloted."""
+  vehicles: Vehicle!
+}
+
+type PersonConnection {
+  """Array of edges."""
+  edges: [PersonEdge!]!
+
+  """Paging information"""
+  pageInfo: PageInfo!
+}
+
+type PersonEdge {
+  """Cursor for this node."""
+  cursor: ConnectionCursor!
+
+  """The node containing the Person"""
+  node: Person!
+}
+
+input PersonFilter {
+  and: [PersonFilter!]
+  birthYear: StringFieldComparison
+  eyeColor: StringFieldComparison
+  films: PersonFilterFilmFilter
+  gender: StringFieldComparison
+  hairColor: StringFieldComparison
+  height: StringFieldComparison
+  id: IDFilterComparison
+  mass: StringFieldComparison
+  name: StringFieldComparison
+  or: [PersonFilter!]
+  skinColor: StringFieldComparison
+  species: PersonFilterSpeciesFilter
+  starships: PersonFilterStarshipFilter
+  vehicles: PersonFilterVehicleFilter
+}
+
+input PersonFilterFilmFilter {
+  and: [PersonFilterFilmFilter!]
+  director: StringFieldComparison
+  episodeID: IntFieldComparison
+  id: IDFilterComparison
+  openingCrawl: StringFieldComparison
+  or: [PersonFilterFilmFilter!]
+  producer: StringFieldComparison
+  releaseDate: StringFieldComparison
+  title: StringFieldComparison
+}
+
+input PersonFilterSpeciesFilter {
+  and: [PersonFilterSpeciesFilter!]
+  averageHeight: StringFieldComparison
+  averageLifespan: StringFieldComparison
+  classification: StringFieldComparison
+  designation: StringFieldComparison
+  eyeColors: StringFieldComparison
+  hairColors: StringFieldComparison
+  id: IDFilterComparison
+  language: StringFieldComparison
+  name: StringFieldComparison
+  or: [PersonFilterSpeciesFilter!]
+  skinColors: StringFieldComparison
+}
+
+input PersonFilterStarshipFilter {
+  MGLT: StringFieldComparison
+  and: [PersonFilterStarshipFilter!]
+  cargoCapacity: StringFieldComparison
+  consumables: StringFieldComparison
+  costInCredits: StringFieldComparison
+  crew: StringFieldComparison
+  hyperdriveRating: StringFieldComparison
+  id: IDFilterComparison
+  length: StringFieldComparison
+  manufacturer: StringFieldComparison
+  maxAtmospheringSpeed: StringFieldComparison
+  model: StringFieldComparison
+  name: StringFieldComparison
+  or: [PersonFilterStarshipFilter!]
+  passengers: StringFieldComparison
+  starshipClass: StringFieldComparison
+}
+
+input PersonFilterVehicleFilter {
+  and: [PersonFilterVehicleFilter!]
+  cargoCapacity: StringFieldComparison
+  consumables: StringFieldComparison
+  costInCredits: StringFieldComparison
+  crew: StringFieldComparison
+  id: IDFilterComparison
+  length: StringFieldComparison
+  manufacturer: StringFieldComparison
+  maxAtmospheringSpeed: StringFieldComparison
+  model: StringFieldComparison
+  name: StringFieldComparison
+  or: [PersonFilterVehicleFilter!]
+  passengers: StringFieldComparison
+  vehicleClass: StringFieldComparison
+}
+
+input PersonSort {
+  direction: SortDirection!
+  field: PersonSortFields!
+  nulls: SortNulls
+}
+
+enum PersonSortFields {
+  birthYear
+  eyeColor
+  gender
+  hairColor
+  height
+  id
+  mass
+  name
+  skinColor
+}
+
+type Planet {
+  """The climate of this planet. Comma separated if diverse."""
+  climate: String!
+
+  """The diameter of this planet in kilometers."""
+  diameter: String!
+
+  """An array of films that this planet has appeared in."""
+  films: Film!
+
+  """
+  A number denoting the gravity of this planet, where "1" is normal or 1 standard G. "2" is twice or 2 standard Gs. "0.5" is half or 0.5 standard Gs.
+  """
+  gravity: String!
+  id: ID!
+
+  """The name of this planet."""
+  name: String!
+
+  """
+  The number of standard days it takes for this planet to complete a single orbit of its local star.
+  """
+  orbitalPeriod: String!
+
+  """The average population of sentient beings inhabiting this planet."""
+  population: String!
+
+  """An array of people that live on this planet."""
+  residents: Person!
+
+  """
+  The number of standard hours it takes for this planet to complete a single rotation on its axis.
+  """
+  rotationPeriod: String!
+
+  """
+  The percentage of the planet surface that is naturally occurring water or bodies of water.
+  """
+  surfaceWater: String!
+
+  """The terrain of this planet. Comma separated if diverse."""
+  terrain: String!
+}
+
+type PlanetConnection {
+  """Array of edges."""
+  edges: [PlanetEdge!]!
+
+  """Paging information"""
+  pageInfo: PageInfo!
+}
+
+type PlanetEdge {
+  """Cursor for this node."""
+  cursor: ConnectionCursor!
+
+  """The node containing the Planet"""
+  node: Planet!
+}
+
+input PlanetFilter {
+  and: [PlanetFilter!]
+  climate: StringFieldComparison
+  diameter: StringFieldComparison
+  films: PlanetFilterFilmFilter
+  gravity: StringFieldComparison
+  id: IDFilterComparison
+  name: StringFieldComparison
+  or: [PlanetFilter!]
+  orbitalPeriod: StringFieldComparison
+  population: StringFieldComparison
+  residents: PlanetFilterPersonFilter
+  rotationPeriod: StringFieldComparison
+  surfaceWater: StringFieldComparison
+  terrain: StringFieldComparison
+}
+
+input PlanetFilterFilmFilter {
+  and: [PlanetFilterFilmFilter!]
+  director: StringFieldComparison
+  episodeID: IntFieldComparison
+  id: IDFilterComparison
+  openingCrawl: StringFieldComparison
+  or: [PlanetFilterFilmFilter!]
+  producer: StringFieldComparison
+  releaseDate: StringFieldComparison
+  title: StringFieldComparison
+}
+
+input PlanetFilterPersonFilter {
+  and: [PlanetFilterPersonFilter!]
+  birthYear: StringFieldComparison
+  eyeColor: StringFieldComparison
+  gender: StringFieldComparison
+  hairColor: StringFieldComparison
+  height: StringFieldComparison
+  id: IDFilterComparison
+  mass: StringFieldComparison
+  name: StringFieldComparison
+  or: [PlanetFilterPersonFilter!]
+  skinColor: StringFieldComparison
+}
+
+input PlanetSort {
+  direction: SortDirection!
+  field: PlanetSortFields!
+  nulls: SortNulls
+}
+
+enum PlanetSortFields {
+  climate
+  diameter
+  gravity
+  id
+  name
+  orbitalPeriod
+  population
+  rotationPeriod
+  surfaceWater
+  terrain
+}
+
 type Query {
+  film(
+    """The id of the record to find."""
+    id: ID!
+  ): Film!
+  films(
+    """Specify to filter the records returned."""
+    filter: FilmFilter! = {}
+
+    """Limit or page results."""
+    paging: CursorPaging! = {first: 10}
+
+    """Specify to sort results."""
+    sorting: [FilmSort!]! = []
+  ): FilmConnection!
+  people(
+    """Specify to filter the records returned."""
+    filter: PersonFilter! = {}
+
+    """Limit or page results."""
+    paging: CursorPaging! = {first: 10}
+
+    """Specify to sort results."""
+    sorting: [PersonSort!]! = []
+  ): PersonConnection!
+  person(
+    """The id of the record to find."""
+    id: ID!
+  ): Person!
+  planet(
+    """The id of the record to find."""
+    id: ID!
+  ): Planet!
+  planets(
+    """Specify to filter the records returned."""
+    filter: PlanetFilter! = {}
+
+    """Limit or page results."""
+    paging: CursorPaging! = {first: 10}
+
+    """Specify to sort results."""
+    sorting: [PlanetSort!]! = []
+  ): PlanetConnection!
   sayHello: String!
+  species(
+    """Specify to filter the records returned."""
+    filter: SpeciesFilter! = {}
+
+    """Limit or page results."""
+    paging: CursorPaging! = {first: 10}
+
+    """Specify to sort results."""
+    sorting: [SpeciesSort!]! = []
+  ): SpeciesConnection!
+  starship(
+    """The id of the record to find."""
+    id: ID!
+  ): Starship!
+  starships(
+    """Specify to filter the records returned."""
+    filter: StarshipFilter! = {}
+
+    """Limit or page results."""
+    paging: CursorPaging! = {first: 10}
+
+    """Specify to sort results."""
+    sorting: [StarshipSort!]! = []
+  ): StarshipConnection!
+  vehicle(
+    """The id of the record to find."""
+    id: ID!
+  ): Vehicle!
+  vehicles(
+    """Specify to filter the records returned."""
+    filter: VehicleFilter! = {}
+
+    """Limit or page results."""
+    paging: CursorPaging! = {first: 10}
+
+    """Specify to sort results."""
+    sorting: [VehicleSort!]! = []
+  ): VehicleConnection!
+}
+
+"""Sort Directions"""
+enum SortDirection {
+  ASC
+  DESC
+}
+
+"""Sort Nulls Options"""
+enum SortNulls {
+  NULLS_FIRST
+  NULLS_LAST
+}
+
+type Species {
+  """The average height of this species in centimeters."""
+  averageHeight: String!
+
+  """The average lifespan of this species in years."""
+  averageLifespan: String!
+
+  """The classification of this species, such as "mammal" or "reptile"."""
+  classification: String!
+
+  """The designation of this species, such as "sentient"."""
+  designation: String!
+
+  """
+  A comma-separated string of common eye colors for this species, "none" if this species does not typically have eyes.
+  """
+  eyeColors: String!
+
+  """An array of Films that this species has appeared in."""
+  films: Film!
+
+  """
+  A comma-separated string of common hair colors for this species, "none" if this species does not typically have hair.
+  """
+  hairColors: String!
+
+  """A planet that this species originates from."""
+  homeworld: Planet!
+  id: ID!
+
+  """The language commonly spoken by this species."""
+  language: String!
+
+  """The name of this species."""
+  name: String!
+
+  """An array of People that are a part of this species."""
+  people: Person!
+
+  """
+  A comma-separated string of common skin colors for this species, "none" if this species does not typically have skin.
+  """
+  skinColors: String!
+}
+
+type SpeciesConnection {
+  """Array of edges."""
+  edges: [SpeciesEdge!]!
+
+  """Paging information"""
+  pageInfo: PageInfo!
+}
+
+type SpeciesEdge {
+  """Cursor for this node."""
+  cursor: ConnectionCursor!
+
+  """The node containing the Species"""
+  node: Species!
+}
+
+input SpeciesFilter {
+  and: [SpeciesFilter!]
+  averageHeight: StringFieldComparison
+  averageLifespan: StringFieldComparison
+  classification: StringFieldComparison
+  designation: StringFieldComparison
+  eyeColors: StringFieldComparison
+  films: SpeciesFilterFilmFilter
+  hairColors: StringFieldComparison
+  id: IDFilterComparison
+  language: StringFieldComparison
+  name: StringFieldComparison
+  or: [SpeciesFilter!]
+  people: SpeciesFilterPersonFilter
+  skinColors: StringFieldComparison
+}
+
+input SpeciesFilterFilmFilter {
+  and: [SpeciesFilterFilmFilter!]
+  director: StringFieldComparison
+  episodeID: IntFieldComparison
+  id: IDFilterComparison
+  openingCrawl: StringFieldComparison
+  or: [SpeciesFilterFilmFilter!]
+  producer: StringFieldComparison
+  releaseDate: StringFieldComparison
+  title: StringFieldComparison
+}
+
+input SpeciesFilterPersonFilter {
+  and: [SpeciesFilterPersonFilter!]
+  birthYear: StringFieldComparison
+  eyeColor: StringFieldComparison
+  gender: StringFieldComparison
+  hairColor: StringFieldComparison
+  height: StringFieldComparison
+  id: IDFilterComparison
+  mass: StringFieldComparison
+  name: StringFieldComparison
+  or: [SpeciesFilterPersonFilter!]
+  skinColor: StringFieldComparison
+}
+
+input SpeciesSort {
+  direction: SortDirection!
+  field: SpeciesSortFields!
+  nulls: SortNulls
+}
+
+enum SpeciesSortFields {
+  averageHeight
+  averageLifespan
+  classification
+  designation
+  eyeColors
+  hairColors
+  id
+  language
+  name
+  skinColors
+}
+
+type Starship {
+  """
+  The Maximum number of Megalights this starship can travel in a standard hour. A "Megalight" is a standard unit of distance and has never been defined before within the Star Wars universe. This figure is only really useful for measuring the difference in speed of starships. We can assume it is similar to AU, the distance between our Sun (Sol) and Earth.
+  """
+  MGLT: String!
+
+  """The maximum number of kilograms that this starship can transport."""
+  cargoCapacity: String!
+
+  """
+  The maximum length of time that this starship can provide consumables for its entire crew without having to resupply.
+  """
+  consumables: String!
+
+  """The cost of this starship new, in galactic credits."""
+  costInCredits: String!
+
+  """The number of personnel needed to run or pilot this starship."""
+  crew: String!
+
+  """An array of Films that this starship has appeared in."""
+  films: Film!
+
+  """The class of this starships hyperdrive."""
+  hyperdriveRating: String!
+  id: ID!
+
+  """The length of this starship in meters."""
+  length: String!
+
+  """The manufacturer of this starship. Comma separated if more than one."""
+  manufacturer: String!
+
+  """
+  The maximum speed of this starship in the atmosphere. "N/A" if this starship is incapable of atmospheric flight.
+  """
+  maxAtmospheringSpeed: String!
+
+  """
+  The model or official name of this starship. Such as "T-65 X-wing" or "DS-1 Orbital Battle Station".
+  """
+  model: String!
+
+  """The name of this starship. The common name, such as "Death Star"."""
+  name: String!
+
+  """The number of non-essential people this starship can transport."""
+  passengers: String!
+
+  """An array of People that this starship has been piloted by."""
+  pilots: Person!
+
+  """
+  The class of this starship, such as "Starfighter" or "Deep Space Mobile Battlestation".
+  """
+  starshipClass: String!
+}
+
+type StarshipConnection {
+  """Array of edges."""
+  edges: [StarshipEdge!]!
+
+  """Paging information"""
+  pageInfo: PageInfo!
+}
+
+type StarshipEdge {
+  """Cursor for this node."""
+  cursor: ConnectionCursor!
+
+  """The node containing the Starship"""
+  node: Starship!
+}
+
+input StarshipFilter {
+  MGLT: StringFieldComparison
+  and: [StarshipFilter!]
+  cargoCapacity: StringFieldComparison
+  consumables: StringFieldComparison
+  costInCredits: StringFieldComparison
+  crew: StringFieldComparison
+  films: StarshipFilterFilmFilter
+  hyperdriveRating: StringFieldComparison
+  id: IDFilterComparison
+  length: StringFieldComparison
+  manufacturer: StringFieldComparison
+  maxAtmospheringSpeed: StringFieldComparison
+  model: StringFieldComparison
+  name: StringFieldComparison
+  or: [StarshipFilter!]
+  passengers: StringFieldComparison
+  pilots: StarshipFilterPersonFilter
+  starshipClass: StringFieldComparison
+}
+
+input StarshipFilterFilmFilter {
+  and: [StarshipFilterFilmFilter!]
+  director: StringFieldComparison
+  episodeID: IntFieldComparison
+  id: IDFilterComparison
+  openingCrawl: StringFieldComparison
+  or: [StarshipFilterFilmFilter!]
+  producer: StringFieldComparison
+  releaseDate: StringFieldComparison
+  title: StringFieldComparison
+}
+
+input StarshipFilterPersonFilter {
+  and: [StarshipFilterPersonFilter!]
+  birthYear: StringFieldComparison
+  eyeColor: StringFieldComparison
+  gender: StringFieldComparison
+  hairColor: StringFieldComparison
+  height: StringFieldComparison
+  id: IDFilterComparison
+  mass: StringFieldComparison
+  name: StringFieldComparison
+  or: [StarshipFilterPersonFilter!]
+  skinColor: StringFieldComparison
+}
+
+input StarshipSort {
+  direction: SortDirection!
+  field: StarshipSortFields!
+  nulls: SortNulls
+}
+
+enum StarshipSortFields {
+  MGLT
+  cargoCapacity
+  consumables
+  costInCredits
+  crew
+  hyperdriveRating
+  id
+  length
+  manufacturer
+  maxAtmospheringSpeed
+  model
+  name
+  passengers
+  starshipClass
+}
+
+input StringFieldComparison {
+  eq: String
+  gt: String
+  gte: String
+  iLike: String
+  in: [String!]
+  is: Boolean
+  isNot: Boolean
+  like: String
+  lt: String
+  lte: String
+  neq: String
+  notILike: String
+  notIn: [String!]
+  notLike: String
+}
+
+type Vehicle {
+  """The maximum number of kilograms that this vehicle can transport."""
+  cargoCapacity: String!
+
+  """
+  The maximum length of time that this vehicle can provide consumables for its entire crew without having to resupply.
+  """
+  consumables: String!
+
+  """The cost of this vehicle new, in Galactic Credits."""
+  costInCredits: String!
+
+  """The number of personnel needed to run or pilot this vehicle."""
+  crew: String!
+
+  """An array of Films that this vehicle has appeared in."""
+  films: Film!
+  id: ID!
+
+  """The length of this vehicle in meters."""
+  length: String!
+
+  """The manufacturer of this vehicle. Comma separated if more than one."""
+  manufacturer: String!
+
+  """The maximum speed of this vehicle in the atmosphere."""
+  maxAtmospheringSpeed: String!
+
+  """
+  The model or official name of this vehicle. Such as "All-Terrain Attack Transport".
+  """
+  model: String!
+
+  """
+  The name of this vehicle. The common name, such as "Sand Crawler" or "Speeder bike".
+  """
+  name: String!
+
+  """The number of non-essential people this vehicle can transport."""
+  passengers: String!
+
+  """An array of People that this vehicle has been piloted by."""
+  pilots: Person!
+
+  """The class of this vehicle, such as "Wheeled" or "Repulsorcraft"."""
+  vehicleClass: String!
+}
+
+type VehicleConnection {
+  """Array of edges."""
+  edges: [VehicleEdge!]!
+
+  """Paging information"""
+  pageInfo: PageInfo!
+}
+
+type VehicleEdge {
+  """Cursor for this node."""
+  cursor: ConnectionCursor!
+
+  """The node containing the Vehicle"""
+  node: Vehicle!
+}
+
+input VehicleFilter {
+  and: [VehicleFilter!]
+  cargoCapacity: StringFieldComparison
+  consumables: StringFieldComparison
+  costInCredits: StringFieldComparison
+  crew: StringFieldComparison
+  films: VehicleFilterFilmFilter
+  id: IDFilterComparison
+  length: StringFieldComparison
+  manufacturer: StringFieldComparison
+  maxAtmospheringSpeed: StringFieldComparison
+  model: StringFieldComparison
+  name: StringFieldComparison
+  or: [VehicleFilter!]
+  passengers: StringFieldComparison
+  pilots: VehicleFilterPersonFilter
+  vehicleClass: StringFieldComparison
+}
+
+input VehicleFilterFilmFilter {
+  and: [VehicleFilterFilmFilter!]
+  director: StringFieldComparison
+  episodeID: IntFieldComparison
+  id: IDFilterComparison
+  openingCrawl: StringFieldComparison
+  or: [VehicleFilterFilmFilter!]
+  producer: StringFieldComparison
+  releaseDate: StringFieldComparison
+  title: StringFieldComparison
+}
+
+input VehicleFilterPersonFilter {
+  and: [VehicleFilterPersonFilter!]
+  birthYear: StringFieldComparison
+  eyeColor: StringFieldComparison
+  gender: StringFieldComparison
+  hairColor: StringFieldComparison
+  height: StringFieldComparison
+  id: IDFilterComparison
+  mass: StringFieldComparison
+  name: StringFieldComparison
+  or: [VehicleFilterPersonFilter!]
+  skinColor: StringFieldComparison
+}
+
+input VehicleSort {
+  direction: SortDirection!
+  field: VehicleSortFields!
+  nulls: SortNulls
+}
+
+enum VehicleSortFields {
+  cargoCapacity
+  consumables
+  costInCredits
+  crew
+  id
+  length
+  manufacturer
+  maxAtmospheringSpeed
+  model
+  name
+  passengers
+  vehicleClass
 }
