@@ -1,5 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { PaginatedResponse, ResourceName } from './types';
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
+import { Cache } from 'cache-manager';
 
 @Injectable()
 export class SwapiService {
@@ -8,10 +10,22 @@ export class SwapiService {
   // Star Wars API returns 10 results per page and there is no parameter to change this
   private RESULTS_PER_PAGE = 10;
 
-  private async fetchPage<RName extends ResourceName>(resource: RName, page: number) {
-    const response = await fetch(`${this.baseURL}/${resource}/?page=${page}&format=json`);
+  constructor(@Inject(CACHE_MANAGER) private readonly cacheManager: Cache) {}
 
-    return await response.json() as PaginatedResponse<RName>;
+  private async fetchPage<RName extends ResourceName>(resource: RName, page: number) {
+    const key = Buffer.from(`${resource}-${page}`).toString('base64');
+    const cachedData = await this.cacheManager.get(key);
+
+    if (typeof cachedData !== 'undefined') {
+      return cachedData as PaginatedResponse<RName>;
+    }
+
+    const response = await fetch(`${this.baseURL}/${resource}/?page=${page}&format=json`);
+    const responseData = await response.json() as PaginatedResponse<RName>;
+
+    await this.cacheManager.set(key, responseData);
+
+    return responseData;
   }
 
   private async getResourceCount(resource: ResourceName) {
