@@ -3,7 +3,7 @@ import { PersonEntity } from 'src/people/person.entity';
 import { PlanetEntity } from 'src/planets/planet.entity';
 import { Column, Entity, ManyToMany, OneToMany, PrimaryColumn } from 'typeorm';
 
-@Entity()
+@Entity('species')
 export class SpeciesEntity {
   @PrimaryColumn()
   id: string;

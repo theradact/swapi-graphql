@@ -2,7 +2,7 @@ import { FilmEntity } from 'src/films/film.entity';
 import { PersonEntity } from 'src/people/person.entity';
 import { Column, Entity, ManyToMany, OneToMany, PrimaryColumn } from 'typeorm';
 
-@Entity()
+@Entity('starships')
 export class StarshipEntity {
   @PrimaryColumn()
   id: string;

@@ -5,7 +5,7 @@ import { StarshipEntity } from 'src/starships/starship.entity';
 import { VehicleEntity } from 'src/vehicles/vehicle.entity';
 import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryColumn } from 'typeorm';
 
-@Entity()
+@Entity('people')
 export class PersonEntity {
   @PrimaryColumn()
   id: string;
