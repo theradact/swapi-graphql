@@ -1,6 +1,6 @@
 import { FilmEntity } from 'src/films/film.entity';
 import { PersonEntity } from 'src/people/person.entity';
-import { Column, Entity, ManyToMany, OneToMany, PrimaryColumn } from 'typeorm';
+import { Column, Entity, ManyToMany, PrimaryColumn } from 'typeorm';
 
 @Entity('starships')
 export class StarshipEntity {

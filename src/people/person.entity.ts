@@ -3,7 +3,7 @@ import { PlanetEntity } from 'src/planets/planet.entity';
 import { SpeciesEntity } from 'src/species/species.entity';
 import { StarshipEntity } from 'src/starships/starship.entity';
 import { VehicleEntity } from 'src/vehicles/vehicle.entity';
-import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryColumn } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryColumn } from 'typeorm';
 
 @Entity('people')
 export class PersonEntity {
