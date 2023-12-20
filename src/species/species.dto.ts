@@ -1,12 +1,12 @@
 import { ObjectType, ID } from "@nestjs/graphql";
 import { FilterableField, IDField, FilterableRelation, Relation } from '@ptc-org/nestjs-query-graphql';
 import { FilmDTO } from "src/films/film.dto";
-import { PersonDTO } from "src/people/person.dto";
+import { CharacterDTO } from "src/characters/character.dto";
 import { PlanetDTO } from "src/planets/planet.dto";
 
 @ObjectType('Species')
 @Relation('homeworld', () => PlanetDTO, { description: `A planet that this species originates from.` })
-@FilterableRelation('people', () => PersonDTO, { description: `An array of People that are a part of this species.` })
+@FilterableRelation('characters', () => CharacterDTO, { description: `An array of characters that are a part of this species.` })
 @FilterableRelation('films', () => FilmDTO, { description: `An array of Films that this species has appeared in.` })
 export class SpeciesDTO {
   @IDField(() => ID)

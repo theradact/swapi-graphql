@@ -1,11 +1,11 @@
 import { ObjectType, ID } from "@nestjs/graphql";
 import { FilterableField, IDField, FilterableRelation } from '@ptc-org/nestjs-query-graphql';
 import { FilmDTO } from "src/films/film.dto";
-import { PersonDTO } from "src/people/person.dto";
+import { CharacterDTO } from "src/characters/character.dto";
 
 @ObjectType('Vehicle')
 @FilterableRelation('films', () => FilmDTO, { description: `An array of Films that this vehicle has appeared in.` })
-@FilterableRelation('pilots', () => PersonDTO, { description: `An array of People that this vehicle has been piloted by.` })
+@FilterableRelation('pilots', () => CharacterDTO, { description: `An array of characters that this vehicle has been piloted by.` })
 export class VehicleDTO {
   @IDField(() => ID)
   id: string;
@@ -31,7 +31,7 @@ export class VehicleDTO {
   @FilterableField({ description: `The number of personnel needed to run or pilot this vehicle.` })
   crew: string;
 
-  @FilterableField({ description: `The number of non-essential people this vehicle can transport.` })
+  @FilterableField({ description: `The number of non-essential characters this vehicle can transport.` })
   passengers: string;
 
   @FilterableField({ description: `The maximum speed of this vehicle in the atmosphere.` })

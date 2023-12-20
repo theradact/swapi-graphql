@@ -6,7 +6,7 @@ import { Vehicle } from 'src/vehicles/vehicle.entity';
 import { Column, Entity , JoinTable, ManyToMany, ManyToOne, PrimaryColumn } from 'typeorm';
 
 @Entity()
-export class Person {
+export class Character {
   @PrimaryColumn()
   id: string;
 
@@ -40,15 +40,15 @@ export class Person {
   @ManyToMany(() => Film, film => film.characters)
   films: Film[];
 
-  @ManyToMany(() => Species, species => species.people)
-  @JoinTable({name: 'person_species'})
+  @ManyToMany(() => Species, species => species.characters)
+  @JoinTable({name: 'character_species'})
   species: Species[];
 
   @ManyToMany(() => Starship, starship => starship.pilots)
-  @JoinTable({name: 'person_starships'})
+  @JoinTable({name: 'character_starships'})
   starships: Starship[];
 
   @ManyToMany(() => Vehicle, vehicle => vehicle.pilots)
-  @JoinTable({name: 'person_vehicles'})
+  @JoinTable({name: 'character_vehicles'})
   vehicles: Vehicle[];
 }

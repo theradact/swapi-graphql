@@ -1,5 +1,5 @@
 import { Film } from 'src/films/film.entity';
-import { Person } from 'src/people/person.entity';
+import { Character } from 'src/characters/character.entity';
 import { Column, Entity, ManyToMany, PrimaryColumn } from 'typeorm';
 
 @Entity()
@@ -49,6 +49,6 @@ export class Starship {
   @ManyToMany(() => Film, film => film.starships)
   films: Film[];
 
-  @ManyToMany(() => Person, person => person.starships)
-  pilots: Person[];
+  @ManyToMany(() => Character, character => character.starships)
+  pilots: Character[];
 }

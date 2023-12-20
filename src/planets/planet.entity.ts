@@ -1,5 +1,5 @@
 import { Film } from 'src/films/film.entity';
-import { Person } from 'src/people/person.entity';
+import { Character } from 'src/characters/character.entity';
 import { Column, Entity, ManyToMany, OneToMany, PrimaryColumn } from 'typeorm';
 
 @Entity()
@@ -34,8 +34,8 @@ export class Planet {
   @Column()
   surfaceWater: string;
 
-  @OneToMany(() => Person, person => person.homeworld)
-  residents: Person[];
+  @OneToMany(() => Character, character => character.homeworld)
+  residents: Character[];
 
   @ManyToMany(() => Film, film => film.planets)
   films: Film[];

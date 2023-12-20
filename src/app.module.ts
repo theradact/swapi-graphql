@@ -6,7 +6,7 @@ import { TempResolver } from './temp.resolver';
 import { CacheModule } from '@nestjs/cache-manager';
 import { redisStore } from 'cache-manager-redis-yet';
 import { FilmsModule } from './films/films.module';
-import { PeopleModule } from './people/people.module';
+import { CharactersModule } from './characters/characters.module';
 import { PlanetsModule } from './planets/planets.module';
 import { SpeciesModule } from './species/species.module';
 import { StarshipsModule } from './starships/starships.module';
@@ -46,7 +46,7 @@ const milisInAnHour = 1000 * 3600;
     }),
     SwapiModule,
     FilmsModule,
-    PeopleModule,
+    CharactersModule,
     PlanetsModule,
     SpeciesModule,
     StarshipsModule,
