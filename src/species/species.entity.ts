@@ -1,10 +1,10 @@
-import { FilmEntity } from 'src/films/film.entity';
-import { PersonEntity } from 'src/people/person.entity';
-import { PlanetEntity } from 'src/planets/planet.entity';
+import { Film } from 'src/films/film.entity';
+import { Person } from 'src/people/person.entity';
+import { Planet } from 'src/planets/planet.entity';
 import { Column, Entity, ManyToMany, ManyToOne, PrimaryColumn } from 'typeorm';
 
-@Entity('species')
-export class SpeciesEntity {
+@Entity()
+export class Species {
   @PrimaryColumn()
   id: string;
 
@@ -35,12 +35,12 @@ export class SpeciesEntity {
   @Column()
   language: string;
 
-  @ManyToOne(type => PlanetEntity, planet => planet)
-  homeworld: PlanetEntity;
+  @ManyToOne(() => Planet, planet => planet)
+  homeworld: Planet;
 
-  @ManyToMany(type => PersonEntity, person => person.species)
-  people: PersonEntity[];
+  @ManyToMany(() => Person, person => person.species)
+  people: Person[];
 
-  @ManyToMany(type => FilmEntity, film => film.species)
-  films: FilmEntity[];
+  @ManyToMany(() => Film, film => film.species)
+  films: Film[];
 }

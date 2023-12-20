@@ -1,12 +1,12 @@
-import { PersonEntity } from 'src/people/person.entity';
-import { PlanetEntity } from 'src/planets/planet.entity';
-import { SpeciesEntity } from 'src/species/species.entity';
-import { StarshipEntity } from 'src/starships/starship.entity';
-import { VehicleEntity } from 'src/vehicles/vehicle.entity';
+import { Person } from 'src/people/person.entity';
+import { Planet } from 'src/planets/planet.entity';
+import { Species } from 'src/species/species.entity';
+import { Starship } from 'src/starships/starship.entity';
+import { Vehicle } from 'src/vehicles/vehicle.entity';
 import { Column, Entity, JoinTable, ManyToMany, PrimaryColumn } from 'typeorm';
 
-@Entity('films')
-export class FilmEntity {
+@Entity()
+export class Film {
   @PrimaryColumn()
   id: string;
 
@@ -28,23 +28,23 @@ export class FilmEntity {
   @Column()
   releaseDate: string;
 
-  @ManyToMany(type => SpeciesEntity, species => species.films)
-  @JoinTable()
-  species: SpeciesEntity[];
+  @ManyToMany(() => Species, species => species.films)
+  @JoinTable({ name: 'film_species' })
+  species: Species[];
 
-  @ManyToMany(type => StarshipEntity, starship => starship.films)
-  @JoinTable()
-  starships: StarshipEntity[];
+  @ManyToMany(() => Starship, starship => starship.films)
+  @JoinTable({ name: 'film_starships' })
+  starships: Starship[];
 
-  @ManyToMany(type => VehicleEntity, vehicle => vehicle.films)
-  @JoinTable()
-  vehicles: VehicleEntity[];
+  @ManyToMany(() => Vehicle, vehicle => vehicle.films)
+  @JoinTable({ name: 'film_vehicles' })
+  vehicles: Vehicle[];
 
-  @ManyToMany(type => PersonEntity, person => person.films)
-  @JoinTable()
-  characters: PersonEntity[];
+  @ManyToMany(() => Person, person => person.films)
+  @JoinTable({ name: 'film_people' })
+  characters: Person[];
 
-  @ManyToMany(type => PlanetEntity, planet => planet.films)
-  @JoinTable()
-  planets: PlanetEntity[];
+  @ManyToMany(() => Planet, planet => planet.films)
+  @JoinTable({ name: 'film_planets' })
+  planets: Planet[];
 }

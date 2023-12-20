@@ -1,9 +1,9 @@
-import { FilmEntity } from 'src/films/film.entity';
-import { PersonEntity } from 'src/people/person.entity';
+import { Film } from 'src/films/film.entity';
+import { Person } from 'src/people/person.entity';
 import { Column, Entity, ManyToMany, PrimaryColumn } from 'typeorm';
 
-@Entity('starships')
-export class StarshipEntity {
+@Entity()
+export class Starship {
   @PrimaryColumn()
   id: string;
 
@@ -46,9 +46,9 @@ export class StarshipEntity {
   @Column()
   consumables: string;
 
-  @ManyToMany(type => FilmEntity, film => film.starships)
-  films: FilmEntity[];
+  @ManyToMany(() => Film, film => film.starships)
+  films: Film[];
 
-  @ManyToMany(type => PersonEntity, person => person.starships)
-  pilots: PersonEntity[];
+  @ManyToMany(() => Person, person => person.starships)
+  pilots: Person[];
 }

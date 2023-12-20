@@ -1,16 +1,16 @@
 import { NestjsQueryGraphQLModule } from '@ptc-org/nestjs-query-graphql';
 import { NestjsQueryTypeOrmModule } from '@ptc-org/nestjs-query-typeorm';
 import { Module } from '@nestjs/common';
-import { PersonEntity } from './person.entity';
+import { Person } from './person.entity';
 import { PersonDTO } from './person.dto';
 
 @Module({
   imports: [
     NestjsQueryGraphQLModule.forFeature({
-      imports: [NestjsQueryTypeOrmModule.forFeature([PersonEntity])],
+      imports: [NestjsQueryTypeOrmModule.forFeature([Person])],
       resolvers: [
         {
-          EntityClass: PersonEntity,
+          EntityClass: Person,
           DTOClass: PersonDTO,
           create: {
             disabled: true,

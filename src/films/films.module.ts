@@ -1,16 +1,16 @@
 import { NestjsQueryGraphQLModule } from '@ptc-org/nestjs-query-graphql';
 import { NestjsQueryTypeOrmModule } from '@ptc-org/nestjs-query-typeorm';
 import { Module } from '@nestjs/common';
-import { FilmEntity } from './film.entity';
+import { Film } from './film.entity';
 import { FilmDTO } from './film.dto';
 
 @Module({
   imports: [
     NestjsQueryGraphQLModule.forFeature({
-      imports: [NestjsQueryTypeOrmModule.forFeature([FilmEntity])],
+      imports: [NestjsQueryTypeOrmModule.forFeature([Film])],
       resolvers: [
         {
-          EntityClass: FilmEntity,
+          EntityClass: Film,
           DTOClass: FilmDTO,
           create: {
             disabled: true,

@@ -12,6 +12,7 @@ import { SpeciesModule } from './species/species.module';
 import { StarshipsModule } from './starships/starships.module';
 import { VehiclesModule } from './vehicles/vehicles.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 
 const milisInAnHour = 1000 * 3600;
 
@@ -36,6 +37,7 @@ const milisInAnHour = 1000 * 3600;
       autoLoadEntities: true,
       synchronize: true,
       logging: true,
+      namingStrategy: new SnakeNamingStrategy(),
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,

@@ -1,9 +1,9 @@
-import { FilmEntity } from 'src/films/film.entity';
-import { PersonEntity } from 'src/people/person.entity';
+import { Film } from 'src/films/film.entity';
+import { Person } from 'src/people/person.entity';
 import { Column, Entity, ManyToMany, PrimaryColumn } from 'typeorm';
 
-@Entity('vehicles')
-export class VehicleEntity {
+@Entity()
+export class Vehicle {
   @PrimaryColumn()
   id: string;
 
@@ -40,9 +40,9 @@ export class VehicleEntity {
   @Column()
   consumables: string;
 
-  @ManyToMany(type => FilmEntity, film => film.vehicles)
-  films: FilmEntity[];
+  @ManyToMany(() => Film, film => film.vehicles)
+  films: Film[];
 
-  @ManyToMany(type => PersonEntity, person => person.vehicles)
-  pilots: PersonEntity[];
+  @ManyToMany(() => Person, person => person.vehicles)
+  pilots: Person[];
 }
