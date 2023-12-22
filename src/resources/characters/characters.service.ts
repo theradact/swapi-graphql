@@ -4,10 +4,10 @@ import { FindManyOptions, Repository } from "typeorm";
 import { SwapiService } from "src/swapi/swapi.service";
 import { Character } from "./character.entity";
 import { PersonResourceDto } from "src/swapi/types";
-import { PlanetsService } from "src/planets/planets.service";
-import { SpeciesService } from "src/species/species.service";
-import { StarshipsService } from "src/starships/starships.service";
-import { VehiclesService } from "src/vehicles/vehicles.service";
+import { PlanetsService } from "src/resources/planets/planets.service";
+import { SpeciesService } from "src/resources/species/species.service";
+import { StarshipsService } from "src/resources/starships/starships.service";
+import { VehiclesService } from "src/resources/vehicles/vehicles.service";
 
 @Injectable()
 export class CharactersService {

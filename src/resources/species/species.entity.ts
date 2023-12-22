@@ -1,6 +1,6 @@
-import { Film } from 'src/films/film.entity';
-import { Character } from 'src/characters/character.entity';
-import { Planet } from 'src/planets/planet.entity';
+import { Film } from 'src/resources/films/film.entity';
+import { Character } from 'src/resources/characters/character.entity';
+import { Planet } from 'src/resources/planets/planet.entity';
 import { Column, Entity, ManyToMany, ManyToOne, PrimaryColumn } from 'typeorm';
 
 @Entity()

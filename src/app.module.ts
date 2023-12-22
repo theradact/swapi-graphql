@@ -2,15 +2,14 @@ import { Module } from '@nestjs/common';
 import { SwapiModule } from './swapi/swapi.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { TempResolver } from './temp.resolver';
 import { CacheModule } from '@nestjs/cache-manager';
 import { redisStore } from 'cache-manager-redis-yet';
-import { FilmsModule } from './films/films.module';
-import { CharactersModule } from './characters/characters.module';
-import { PlanetsModule } from './planets/planets.module';
-import { SpeciesModule } from './species/species.module';
-import { StarshipsModule } from './starships/starships.module';
-import { VehiclesModule } from './vehicles/vehicles.module';
+import { FilmsModule } from './resources/films/films.module';
+import { CharactersModule } from './resources/characters/characters.module';
+import { PlanetsModule } from './resources/planets/planets.module';
+import { SpeciesModule } from './resources/species/species.module';
+import { StarshipsModule } from './resources/starships/starships.module';
+import { VehiclesModule } from './resources/vehicles/vehicles.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 
@@ -52,6 +51,6 @@ const milisInAnHour = 1000 * 3600;
     StarshipsModule,
     VehiclesModule,
   ],
-  providers: [TempResolver],
+  providers: [],
 })
 export class AppModule { }

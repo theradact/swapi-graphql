@@ -5,7 +5,7 @@ import { Species } from './species.entity';
 import { SpeciesDTO } from './species.dto';
 import { SpeciesService } from './species.service';
 import { SwapiModule } from 'src/swapi/swapi.module';
-import { PlanetsModule } from 'src/planets/planets.module';
+import { PlanetsModule } from 'src/resources/planets/planets.module';
 
 @Module({
   imports: [

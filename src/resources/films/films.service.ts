@@ -4,11 +4,11 @@ import { FindManyOptions, Repository } from "typeorm";
 import { Film } from "./film.entity";
 import { SwapiService } from "src/swapi/swapi.service";
 import { FilmResourceDto } from "src/swapi/types";
-import { SpeciesService } from "src/species/species.service";
-import { StarshipsService } from "src/starships/starships.service";
-import { VehiclesService } from "src/vehicles/vehicles.service";
-import { CharactersService } from "src/characters/characters.service";
-import { PlanetsService } from "src/planets/planets.service";
+import { SpeciesService } from "src/resources/species/species.service";
+import { StarshipsService } from "src/resources/starships/starships.service";
+import { VehiclesService } from "src/resources/vehicles/vehicles.service";
+import { CharactersService } from "src/resources/characters/characters.service";
+import { PlanetsService } from "src/resources/planets/planets.service";
 
 @Injectable()
 export class FilmsService {

@@ -4,7 +4,7 @@ import { FindManyOptions, Repository } from "typeorm";
 import { SwapiService } from "src/swapi/swapi.service";
 import { SpeciesResourceDto } from "src/swapi/types";
 import { Species } from "./species.entity";
-import { PlanetsService } from "src/planets/planets.service";
+import { PlanetsService } from "src/resources/planets/planets.service";
 
 @Injectable()
 export class SpeciesService {

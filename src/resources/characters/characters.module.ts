@@ -5,10 +5,10 @@ import { Character } from './character.entity';
 import { CharacterDTO } from './character.dto';
 import { CharactersService } from './characters.service';
 import { SwapiModule } from 'src/swapi/swapi.module';
-import { PlanetsModule } from 'src/planets/planets.module';
-import { SpeciesModule } from 'src/species/species.module';
-import { StarshipsModule } from 'src/starships/starships.module';
-import { VehiclesModule } from 'src/vehicles/vehicles.module';
+import { PlanetsModule } from 'src/resources/planets/planets.module';
+import { SpeciesModule } from 'src/resources/species/species.module';
+import { StarshipsModule } from 'src/resources/starships/starships.module';
+import { VehiclesModule } from 'src/resources/vehicles/vehicles.module';
 
 @Module({
   imports: [

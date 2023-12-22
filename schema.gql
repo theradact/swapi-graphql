@@ -565,7 +565,6 @@ type Query {
     """Specify to sort results."""
     sorting: [PlanetSort!]! = []
   ): PlanetConnection!
-  sayHello: String!
   species(
     """Specify to filter the records returned."""
     filter: SpeciesFilter! = {}

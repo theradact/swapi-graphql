@@ -5,11 +5,11 @@ import { Film } from './film.entity';
 import { FilmDTO } from './film.dto';
 import { FilmsService } from './films.service';
 import { SwapiModule } from 'src/swapi/swapi.module';
-import { SpeciesModule } from 'src/species/species.module';
-import { StarshipsModule } from 'src/starships/starships.module';
-import { VehiclesModule } from 'src/vehicles/vehicles.module';
-import { CharactersModule } from 'src/characters/characters.module';
-import { PlanetsModule } from 'src/planets/planets.module';
+import { SpeciesModule } from 'src/resources/species/species.module';
+import { StarshipsModule } from 'src/resources/starships/starships.module';
+import { VehiclesModule } from 'src/resources/vehicles/vehicles.module';
+import { CharactersModule } from 'src/resources/characters/characters.module';
+import { PlanetsModule } from 'src/resources/planets/planets.module';
 
 @Module({
   imports: [
