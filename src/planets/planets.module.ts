@@ -3,9 +3,12 @@ import { NestjsQueryTypeOrmModule } from '@ptc-org/nestjs-query-typeorm';
 import { Module } from '@nestjs/common';
 import { Planet } from './planet.entity';
 import { PlanetDTO } from './planet.dto';
+import { PlanetsService } from './planets.service';
+import { SwapiModule } from 'src/swapi/swapi.module';
 
 @Module({
   imports: [
+    SwapiModule,
     NestjsQueryGraphQLModule.forFeature({
       imports: [NestjsQueryTypeOrmModule.forFeature([Planet])],
       resolvers: [
@@ -28,5 +31,7 @@ import { PlanetDTO } from './planet.dto';
       ],
     }),
   ],
+  providers: [PlanetsService],
+  exports: [PlanetsService],
 })
-export class PlanetsModule {}
+export class PlanetsModule { }

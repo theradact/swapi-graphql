@@ -3,9 +3,12 @@ import { NestjsQueryTypeOrmModule } from '@ptc-org/nestjs-query-typeorm';
 import { Module } from '@nestjs/common';
 import { Starship } from './starship.entity';
 import { StarshipDTO } from './starship.dto';
+import { StarshipsService } from './starships.service';
+import { SwapiModule } from 'src/swapi/swapi.module';
 
 @Module({
   imports: [
+    SwapiModule,
     NestjsQueryGraphQLModule.forFeature({
       imports: [NestjsQueryTypeOrmModule.forFeature([Starship])],
       resolvers: [
@@ -28,5 +31,7 @@ import { StarshipDTO } from './starship.dto';
       ],
     }),
   ],
+  providers: [StarshipsService],
+  exports: [StarshipsService],
 })
 export class StarshipsModule {}

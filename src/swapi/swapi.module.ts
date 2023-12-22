@@ -5,5 +5,6 @@ import { SwapiController } from './swapi.controller';
 @Module({
   controllers: [SwapiController],
   providers: [SwapiService],
+  exports: [SwapiService],
 })
 export class SwapiModule {}

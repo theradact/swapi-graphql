@@ -3,9 +3,14 @@ import { NestjsQueryTypeOrmModule } from '@ptc-org/nestjs-query-typeorm';
 import { Module } from '@nestjs/common';
 import { Species } from './species.entity';
 import { SpeciesDTO } from './species.dto';
+import { SpeciesService } from './species.service';
+import { SwapiModule } from 'src/swapi/swapi.module';
+import { PlanetsModule } from 'src/planets/planets.module';
 
 @Module({
   imports: [
+    SwapiModule,
+    PlanetsModule,
     NestjsQueryGraphQLModule.forFeature({
       imports: [NestjsQueryTypeOrmModule.forFeature([Species])],
       resolvers: [
@@ -28,5 +33,7 @@ import { SpeciesDTO } from './species.dto';
       ],
     }),
   ],
+  providers: [SpeciesService],
+  exports: [SpeciesService],
 })
 export class SpeciesModule {}
