@@ -5,6 +5,7 @@ import { PlanetsService } from '../resources/planets/planets.service';
 import { SpeciesService } from '../resources/species/species.service';
 import { StarshipsService } from '../resources/starships/starships.service';
 import { VehiclesService } from '../resources/vehicles/vehicles.service';
+import ProgressBar = require("progress");
 
 export interface PopulateableService {
   readonly name: string;
@@ -14,8 +15,6 @@ export interface PopulateableService {
 
 @Injectable()
 export class PopulateService {
-  private isLoggingEnabled = true;
-
   public constructor(
     private readonly charactersService: CharactersService,
     private readonly filmsService: FilmsService,
@@ -25,33 +24,33 @@ export class PopulateService {
     private readonly vehiclesService: VehiclesService,
   ) { }
 
-  private maybeLog(message: string) {
-    if (this.isLoggingEnabled) {
-      console.log(message);
-    }
-  }
-
-  private async populateResource(service: PopulateableService) {
-    this.maybeLog(`${service.name} started populating`);
-    await service.populate();
-    this.maybeLog(`${service.name} resource populated successfully.`);
+  private log(message: string) {
+    const dateString = (new Date()).toLocaleString();
+    console.log(`[${dateString}] \x1b[1m\x1b[34m${message}\x1b[0m`);
   }
 
   public async populate() {
-    this.maybeLog(`Started clearing the database.`);
-    await this.clear();
-    this.maybeLog(`Finished clearing the database`);
+    this.log(`Started Star Wars API data synchronization.`);
 
-    this.maybeLog(`Started resources population.`);
-    await this.populateResource(this.planetsService);
+    await this.clear();
+
+    const bar = new ProgressBar(`Synchronizing data: [\x1b[32m\x1b[1m:bar\x1b[0m] :percent`, {
+      width: 25,
+      complete: '■',
+      incomplete: ' ',
+      total: 6,
+    });
+
+    await this.planetsService.populate().then(() => bar.tick());
     await Promise.all([
-      this.populateResource(this.speciesService),
-      this.populateResource(this.starshipsService),
-      this.populateResource(this.vehiclesService),
+      this.speciesService.populate().then(() => bar.tick()),
+      this.starshipsService.populate().then(() => bar.tick()),
+      this.vehiclesService.populate().then(() => bar.tick()),
     ]);
-    await this.populateResource(this.charactersService);
-    await this.populateResource(this.filmsService);
-    this.maybeLog(`All resources have been populated.`);
+    await this.charactersService.populate().then(() => bar.tick());
+    await this.filmsService.populate().then(() => bar.tick());
+
+    this.log(`Data synchronization complete.`);
   }
 
   private async clear() {
