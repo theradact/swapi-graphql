@@ -4,7 +4,7 @@ import { Module } from '@nestjs/common';
 import { Planet } from './planet.entity';
 import { PlanetDTO } from './planet.dto';
 import { PlanetsService } from './planets.service';
-import { SwapiModule } from 'src/swapi/swapi.module';
+import { SwapiModule } from '../../swapi/swapi.module';
 
 @Module({
   imports: [

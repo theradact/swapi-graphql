@@ -1,7 +1,7 @@
 import { ObjectType, ID } from "@nestjs/graphql";
 import { FilterableField, IDField, FilterableRelation } from '@ptc-org/nestjs-query-graphql';
-import { FilmDTO } from "src/resources/films/film.dto";
-import { CharacterDTO } from "src/resources/characters/character.dto";
+import { CharacterDTO } from "../characters/character.dto";
+import { FilmDTO } from "../films/film.dto";
 
 @ObjectType('Planet')
 @FilterableRelation('residents', () => CharacterDTO, { description: `An array of characters that live on this planet.` })

@@ -1,8 +1,8 @@
 import { ObjectType, ID } from "@nestjs/graphql";
 import { FilterableField, IDField, FilterableRelation, Relation } from '@ptc-org/nestjs-query-graphql';
-import { FilmDTO } from "src/resources/films/film.dto";
-import { CharacterDTO } from "src/resources/characters/character.dto";
-import { PlanetDTO } from "src/resources/planets/planet.dto";
+import { CharacterDTO } from "../characters/character.dto";
+import { FilmDTO } from "../films/film.dto";
+import { PlanetDTO } from "../planets/planet.dto";
 
 @ObjectType('Species')
 @Relation('homeworld', () => PlanetDTO, { description: `A planet that this species originates from.` })

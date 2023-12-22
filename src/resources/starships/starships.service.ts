@@ -1,9 +1,9 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { FindManyOptions, Repository } from "typeorm";
-import { SwapiService } from "src/swapi/swapi.service";
-import { Starship } from "./Starship.entity";
-import { StarshipResourceDto } from "src/swapi/types";
+import { SwapiService } from "../../swapi/swapi.service";
+import { StarshipResourceDto } from "../../swapi/types";
+import { Starship } from "./starship.entity";
 
 @Injectable()
 export class StarshipsService {

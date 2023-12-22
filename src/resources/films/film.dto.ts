@@ -1,10 +1,10 @@
 import { Int, ObjectType, ID } from "@nestjs/graphql";
 import { FilterableField, IDField, FilterableRelation } from '@ptc-org/nestjs-query-graphql';
-import { CharacterDTO } from "src/resources/characters/character.dto";
-import { PlanetDTO } from "src/resources/planets/planet.dto";
-import { SpeciesDTO } from "src/resources/species/species.dto";
-import { StarshipDTO } from "src/resources/starships/starship.dto";
-import { VehicleDTO } from "src/resources/vehicles/vehicle.dto";
+import { CharacterDTO } from "../characters/character.dto";
+import { PlanetDTO } from "../planets/planet.dto";
+import { SpeciesDTO } from "../species/species.dto";
+import { StarshipDTO } from "../starships/starship.dto";
+import { VehicleDTO } from "../vehicles/vehicle.dto";
 
 @ObjectType('Film')
 @FilterableRelation('species', () => SpeciesDTO, { description: `An array of species that are in this film.` })

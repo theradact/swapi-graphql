@@ -1,9 +1,9 @@
-import { Character } from 'src/resources/characters/character.entity';
-import { Planet } from 'src/resources/planets/planet.entity';
-import { Species } from 'src/resources/species/species.entity';
-import { Starship } from 'src/resources/starships/starship.entity';
-import { Vehicle } from 'src/resources/vehicles/vehicle.entity';
 import { Column, Entity, JoinTable, ManyToMany, PrimaryColumn } from 'typeorm';
+import { Character } from '../characters/character.entity';
+import { Planet } from '../planets/planet.entity';
+import { Species } from '../species/species.entity';
+import { Starship } from '../starships/starship.entity';
+import { Vehicle } from '../vehicles/vehicle.entity';
 
 @Entity()
 export class Film {

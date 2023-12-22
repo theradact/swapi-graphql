@@ -1,6 +1,6 @@
-import { Film } from 'src/resources/films/film.entity';
-import { Character } from 'src/resources/characters/character.entity';
 import { Column, Entity, ManyToMany, PrimaryColumn } from 'typeorm';
+import { Character } from '../characters/character.entity';
+import { Film } from '../films/film.entity';
 
 @Entity()
 export class Starship {

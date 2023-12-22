@@ -4,11 +4,11 @@ import { Module } from '@nestjs/common';
 import { Character } from './character.entity';
 import { CharacterDTO } from './character.dto';
 import { CharactersService } from './characters.service';
-import { SwapiModule } from 'src/swapi/swapi.module';
-import { PlanetsModule } from 'src/resources/planets/planets.module';
-import { SpeciesModule } from 'src/resources/species/species.module';
-import { StarshipsModule } from 'src/resources/starships/starships.module';
-import { VehiclesModule } from 'src/resources/vehicles/vehicles.module';
+import { SwapiModule } from '../../swapi/swapi.module';
+import { PlanetsModule } from '../planets/planets.module';
+import { SpeciesModule } from '../species/species.module';
+import { StarshipsModule } from '../starships/starships.module';
+import { VehiclesModule } from '../vehicles/vehicles.module';
 
 @Module({
   imports: [

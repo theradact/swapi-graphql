@@ -4,7 +4,7 @@ import { Module } from '@nestjs/common';
 import { Vehicle } from './vehicle.entity';
 import { VehicleDTO } from './vehicle.dto';
 import { VehiclesService } from './vehicles.service';
-import { SwapiModule } from 'src/swapi/swapi.module';
+import { SwapiModule } from '../../swapi/swapi.module';
 
 @Module({
   imports: [

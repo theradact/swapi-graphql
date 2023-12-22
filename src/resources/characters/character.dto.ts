@@ -1,10 +1,10 @@
 import { ObjectType, ID } from "@nestjs/graphql";
 import { FilterableField, IDField, FilterableRelation, Relation } from '@ptc-org/nestjs-query-graphql';
-import { FilmDTO } from "src/resources/films/film.dto";
-import { PlanetDTO } from "src/resources/planets/planet.dto";
-import { SpeciesDTO } from "src/resources/species/species.dto";
-import { StarshipDTO } from "src/resources/starships/starship.dto";
-import { VehicleDTO } from "src/resources/vehicles/vehicle.dto";
+import { FilmDTO } from "../films/film.dto";
+import { PlanetDTO } from "../planets/planet.dto";
+import { SpeciesDTO } from "../species/species.dto";
+import { StarshipDTO } from "../starships/starship.dto";
+import { VehicleDTO } from "../vehicles/vehicle.dto";
 
 @ObjectType('Character')
 @Relation('homeworld', () => PlanetDTO, { description: `A planet that this character was born on or inhabits.` })

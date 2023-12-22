@@ -1,10 +1,10 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { FindManyOptions, Repository } from "typeorm";
-import { SwapiService } from "src/swapi/swapi.service";
-import { SpeciesResourceDto } from "src/swapi/types";
+import { SwapiService } from "../../swapi/swapi.service";
+import { SpeciesResourceDto } from "../../swapi/types";
+import { PlanetsService } from "../planets/planets.service";
 import { Species } from "./species.entity";
-import { PlanetsService } from "src/resources/planets/planets.service";
 
 @Injectable()
 export class SpeciesService {

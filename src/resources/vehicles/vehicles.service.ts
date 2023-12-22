@@ -1,9 +1,9 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { FindManyOptions, Repository } from "typeorm";
-import { SwapiService } from "src/swapi/swapi.service";
+import { SwapiService } from "../../swapi/swapi.service";
+import { VehicleResourceDto } from "../../swapi/types";
 import { Vehicle } from "./vehicle.entity";
-import { VehicleResourceDto } from "src/swapi/types";
 
 @Injectable()
 export class VehiclesService {

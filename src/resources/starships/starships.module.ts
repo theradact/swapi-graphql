@@ -4,7 +4,7 @@ import { Module } from '@nestjs/common';
 import { Starship } from './starship.entity';
 import { StarshipDTO } from './starship.dto';
 import { StarshipsService } from './starships.service';
-import { SwapiModule } from 'src/swapi/swapi.module';
+import { SwapiModule } from '../../swapi/swapi.module';
 
 @Module({
   imports: [

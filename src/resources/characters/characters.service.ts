@@ -1,13 +1,13 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { FindManyOptions, Repository } from "typeorm";
-import { SwapiService } from "src/swapi/swapi.service";
+import { SwapiService } from "../../swapi/swapi.service";
+import { PersonResourceDto } from "../../swapi/types";
+import { PlanetsService } from "../planets/planets.service";
+import { SpeciesService } from "../species/species.service";
+import { StarshipsService } from "../starships/starships.service";
+import { VehiclesService } from "../vehicles/vehicles.service";
 import { Character } from "./character.entity";
-import { PersonResourceDto } from "src/swapi/types";
-import { PlanetsService } from "src/resources/planets/planets.service";
-import { SpeciesService } from "src/resources/species/species.service";
-import { StarshipsService } from "src/resources/starships/starships.service";
-import { VehiclesService } from "src/resources/vehicles/vehicles.service";
 
 @Injectable()
 export class CharactersService {
