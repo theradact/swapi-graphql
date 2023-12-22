@@ -28,23 +28,23 @@ export class Film {
   @Column()
   releaseDate: string;
 
-  @ManyToMany(() => Species, species => species.films)
+  @ManyToMany(() => Species, species => species.films, {onDelete:'CASCADE'})
   @JoinTable({ name: 'film_species' })
   species: Species[];
 
-  @ManyToMany(() => Starship, starship => starship.films)
+  @ManyToMany(() => Starship, starship => starship.films, {onDelete:'CASCADE'})
   @JoinTable({ name: 'film_starships' })
   starships: Starship[];
 
-  @ManyToMany(() => Vehicle, vehicle => vehicle.films)
+  @ManyToMany(() => Vehicle, vehicle => vehicle.films, {onDelete:'CASCADE'})
   @JoinTable({ name: 'film_vehicles' })
   vehicles: Vehicle[];
 
-  @ManyToMany(() => Character, character => character.films)
+  @ManyToMany(() => Character, character => character.films, {onDelete:'CASCADE'})
   @JoinTable({ name: 'film_characters' })
   characters: Character[];
 
-  @ManyToMany(() => Planet, planet => planet.films)
+  @ManyToMany(() => Planet, planet => planet.films, {onDelete:'CASCADE'})
   @JoinTable({ name: 'film_planets' })
   planets: Planet[];
 }

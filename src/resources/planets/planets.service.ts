@@ -4,9 +4,12 @@ import { FindManyOptions, Repository } from "typeorm";
 import { SwapiService } from "../../swapi/swapi.service";
 import { PlanetResourceDto } from "../../swapi/types";
 import { Planet } from "./planet.entity";
+import { PopulateableService } from "../../populate/populate.service";
 
 @Injectable()
-export class PlanetsService {
+export class PlanetsService implements PopulateableService {
+  readonly name = 'Planets';
+
   public constructor(
     @InjectRepository(Planet) private readonly planetRepository: Repository<Planet>,
     private readonly swapiService: SwapiService
@@ -40,7 +43,10 @@ export class PlanetsService {
 
     const allPlanets = await Promise.all(allSWAPIPlanets.map(this.create, this));
 
-    await this.planetRepository.clear();
     await this.planetRepository.save(allPlanets);
+  }
+
+  public async clear() {
+    await this.planetRepository.delete({});
   }
 }

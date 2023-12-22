@@ -34,21 +34,21 @@ export class Character {
   @Column()
   skinColor: string;
 
-  @ManyToOne(() => Planet, planet => planet.residents)
+  @ManyToOne(() => Planet, planet => planet.residents, {onDelete:'CASCADE'})
   homeworld: Planet;
 
-  @ManyToMany(() => Film, film => film.characters)
+  @ManyToMany(() => Film, film => film.characters, {onDelete:'CASCADE'})
   films: Film[];
 
-  @ManyToMany(() => Species, species => species.characters)
+  @ManyToMany(() => Species, species => species.characters, {onDelete:'CASCADE'})
   @JoinTable({name: 'character_species'})
   species: Species[];
 
-  @ManyToMany(() => Starship, starship => starship.pilots)
+  @ManyToMany(() => Starship, starship => starship.pilots, {onDelete:'CASCADE'})
   @JoinTable({name: 'character_starships'})
   starships: Starship[];
 
-  @ManyToMany(() => Vehicle, vehicle => vehicle.pilots)
+  @ManyToMany(() => Vehicle, vehicle => vehicle.pilots, {onDelete:'CASCADE'})
   @JoinTable({name: 'character_vehicles'})
   vehicles: Vehicle[];
 }

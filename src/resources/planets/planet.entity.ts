@@ -34,9 +34,9 @@ export class Planet {
   @Column()
   surfaceWater: string;
 
-  @OneToMany(() => Character, character => character.homeworld)
+  @OneToMany(() => Character, character => character.homeworld, {onDelete:'CASCADE'})
   residents: Character[];
 
-  @ManyToMany(() => Film, film => film.planets)
+  @ManyToMany(() => Film, film => film.planets, {onDelete:'CASCADE'})
   films: Film[];
 }

@@ -35,12 +35,12 @@ export class Species {
   @Column()
   language: string;
 
-  @ManyToOne(() => Planet, planet => planet)
+  @ManyToOne(() => Planet, planet => planet, {onDelete:'CASCADE'})
   homeworld: Planet;
 
-  @ManyToMany(() => Character, character => character.species)
+  @ManyToMany(() => Character, character => character.species, {onDelete:'CASCADE'})
   characters: Character[];
 
-  @ManyToMany(() => Film, film => film.species)
+  @ManyToMany(() => Film, film => film.species, {onDelete:'CASCADE'})
   films: Film[];
 }

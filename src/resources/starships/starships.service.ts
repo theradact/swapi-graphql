@@ -4,9 +4,12 @@ import { FindManyOptions, Repository } from "typeorm";
 import { SwapiService } from "../../swapi/swapi.service";
 import { StarshipResourceDto } from "../../swapi/types";
 import { Starship } from "./starship.entity";
+import { PopulateableService } from "../../populate/populate.service";
 
 @Injectable()
-export class StarshipsService {
+export class StarshipsService implements PopulateableService {
+  readonly name = 'Starships';
+
   public constructor(
     @InjectRepository(Starship) private readonly starshipRepository: Repository<Starship>,
     private readonly swapiService: SwapiService
@@ -44,7 +47,10 @@ export class StarshipsService {
 
     const allStarships = await Promise.all(allSWAPIStarships.map(this.create, this));
 
-    await this.starshipRepository.clear();
     await this.starshipRepository.save(allStarships);
+  }
+
+  public async clear() {
+    await this.starshipRepository.delete({});
   }
 }

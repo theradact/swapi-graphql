@@ -5,9 +5,12 @@ import { SwapiService } from "../../swapi/swapi.service";
 import { SpeciesResourceDto } from "../../swapi/types";
 import { PlanetsService } from "../planets/planets.service";
 import { Species } from "./species.entity";
+import { PopulateableService } from "../../populate/populate.service";
 
 @Injectable()
-export class SpeciesService {
+export class SpeciesService implements PopulateableService {
+  readonly name = 'Species';
+
   public constructor(
     @InjectRepository(Species) private readonly speciesRepository: Repository<Species>,
     private readonly planetsService: PlanetsService,
@@ -46,7 +49,10 @@ export class SpeciesService {
 
     const allSpecies = await Promise.all(allSWAPISpecies.map(this.create, this));
 
-    await this.speciesRepository.clear();
     await this.speciesRepository.save(allSpecies);
+  }
+
+  public async clear() {
+    await this.speciesRepository.delete({});
   }
 }

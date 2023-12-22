@@ -46,9 +46,9 @@ export class Starship {
   @Column()
   consumables: string;
 
-  @ManyToMany(() => Film, film => film.starships)
+  @ManyToMany(() => Film, film => film.starships, {onDelete:'CASCADE'})
   films: Film[];
 
-  @ManyToMany(() => Character, character => character.starships)
+  @ManyToMany(() => Character, character => character.starships, {onDelete:'CASCADE'})
   pilots: Character[];
 }

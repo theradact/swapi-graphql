@@ -12,6 +12,7 @@ import { StarshipsModule } from './resources/starships/starships.module';
 import { VehiclesModule } from './resources/vehicles/vehicles.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
+import { PopulateService } from './populate/populate.service';
 
 const milisInAnHour = 1000 * 3600;
 
@@ -34,8 +35,8 @@ const milisInAnHour = 1000 * 3600;
       username: 'swgraphql',
       password: 'swgraphql',
       autoLoadEntities: true,
-      synchronize: true,
-      logging: true,
+      synchronize: process.env.SCRIPT === 'populate',
+      logging: process.env.SCRIPT !== 'populate',
       namingStrategy: new SnakeNamingStrategy(),
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
@@ -51,6 +52,6 @@ const milisInAnHour = 1000 * 3600;
     StarshipsModule,
     VehiclesModule,
   ],
-  providers: [],
+  providers: [PopulateService],
 })
 export class AppModule { }

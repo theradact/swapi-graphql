@@ -9,9 +9,12 @@ import { PlanetsService } from "../planets/planets.service";
 import { SpeciesService } from "../species/species.service";
 import { StarshipsService } from "../starships/starships.service";
 import { VehiclesService } from "../vehicles/vehicles.service";
+import { PopulateableService } from "../../populate/populate.service";
 
 @Injectable()
-export class FilmsService {
+export class FilmsService implements PopulateableService {
+  readonly name = 'Films';
+
   public constructor(
     @InjectRepository(Film) private readonly filmRepository: Repository<Film>,
     private readonly speciesService: SpeciesService,
@@ -63,7 +66,10 @@ export class FilmsService {
 
     const allFilms = await Promise.all(allSWAPIFilms.map(this.create, this));
 
-    await this.filmRepository.clear();
     await this.filmRepository.save(allFilms);
+  }
+
+  public async clear() {
+    await this.filmRepository.delete({});
   }
 }

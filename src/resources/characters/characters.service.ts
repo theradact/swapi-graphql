@@ -8,9 +8,12 @@ import { SpeciesService } from "../species/species.service";
 import { StarshipsService } from "../starships/starships.service";
 import { VehiclesService } from "../vehicles/vehicles.service";
 import { Character } from "./character.entity";
+import { PopulateableService } from "../../populate/populate.service";
 
 @Injectable()
-export class CharactersService {
+export class CharactersService implements PopulateableService {
+  readonly name = 'Characters';
+
   public constructor(
     @InjectRepository(Character) private readonly characterRepository: Repository<Character>,
     private readonly planetsService: PlanetsService,
@@ -61,7 +64,10 @@ export class CharactersService {
 
     const allCharacters = await Promise.all(allSWAPICharacters.map(this.create, this));
 
-    await this.characterRepository.clear();
     await this.characterRepository.save(allCharacters);
+  }
+
+  public async clear() {
+    await this.characterRepository.delete({});
   }
 }

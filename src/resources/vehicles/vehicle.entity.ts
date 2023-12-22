@@ -40,9 +40,9 @@ export class Vehicle {
   @Column()
   consumables: string;
 
-  @ManyToMany(() => Film, film => film.vehicles)
+  @ManyToMany(() => Film, film => film.vehicles, {onDelete:'CASCADE'})
   films: Film[];
 
-  @ManyToMany(() => Character, character => character.vehicles)
+  @ManyToMany(() => Character, character => character.vehicles, {onDelete:'CASCADE'})
   pilots: Character[];
 }
