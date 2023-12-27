@@ -1,11 +1,11 @@
 import { ObjectType, ID } from "@nestjs/graphql";
-import { FilterableField, IDField, FilterableRelation } from '@ptc-org/nestjs-query-graphql';
+import { FilterableField, IDField, FilterableUnPagedRelation } from '@ptc-org/nestjs-query-graphql';
 import { FilmDTO } from "../films/film.dto";
 import { CharacterDTO } from "../characters/character.dto";
 
 @ObjectType('Starship')
-@FilterableRelation('films', () => FilmDTO, { description: `An array of Films that this starship has appeared in.` })
-@FilterableRelation('pilots', () => CharacterDTO, { description: `An array of characters that this starship has been piloted by.` })
+@FilterableUnPagedRelation('films', () => FilmDTO, { description: `An array of Films that this starship has appeared in.` })
+@FilterableUnPagedRelation('pilots', () => CharacterDTO, { description: `An array of characters that this starship has been piloted by.` })
 export class StarshipDTO {
   @IDField(() => ID)
   id: string;

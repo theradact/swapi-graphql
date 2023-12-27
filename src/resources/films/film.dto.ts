@@ -1,5 +1,5 @@
 import { Int, ObjectType, ID } from "@nestjs/graphql";
-import { FilterableField, IDField, FilterableRelation } from '@ptc-org/nestjs-query-graphql';
+import { FilterableField, IDField, FilterableUnPagedRelation } from '@ptc-org/nestjs-query-graphql';
 import { CharacterDTO } from "../characters/character.dto";
 import { PlanetDTO } from "../planets/planet.dto";
 import { SpeciesDTO } from "../species/species.dto";
@@ -7,11 +7,11 @@ import { StarshipDTO } from "../starships/starship.dto";
 import { VehicleDTO } from "../vehicles/vehicle.dto";
 
 @ObjectType('Film')
-@FilterableRelation('species', () => SpeciesDTO, { description: `An array of species that are in this film.` })
-@FilterableRelation('starships', () => StarshipDTO, { description: `An array of starships that are in this film.` })
-@FilterableRelation('vehicles', () => VehicleDTO, { description: `An array of vehicles that are in this film.` })
-@FilterableRelation('characters', () => CharacterDTO, { description: `An array of characters that are in this film.` })
-@FilterableRelation('planets', () => PlanetDTO, { description: `An array of planets that are in this film.` })
+@FilterableUnPagedRelation('species', () => SpeciesDTO, { description: `An array of species that are in this film.` })
+@FilterableUnPagedRelation('starships', () => StarshipDTO, { description: `An array of starships that are in this film.` })
+@FilterableUnPagedRelation('vehicles', () => VehicleDTO, { description: `An array of vehicles that are in this film.` })
+@FilterableUnPagedRelation('characters', () => CharacterDTO, { description: `An array of characters that are in this film.` })
+@FilterableUnPagedRelation('planets', () => PlanetDTO, { description: `An array of planets that are in this film.` })
 export class FilmDTO {
   @IDField(() => ID)
   id: string;

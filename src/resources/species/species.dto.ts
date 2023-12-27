@@ -1,13 +1,13 @@
 import { ObjectType, ID } from "@nestjs/graphql";
-import { FilterableField, IDField, FilterableRelation, Relation } from '@ptc-org/nestjs-query-graphql';
+import { FilterableField, IDField, FilterableUnPagedRelation, FilterableRelation } from '@ptc-org/nestjs-query-graphql';
 import { CharacterDTO } from "../characters/character.dto";
 import { FilmDTO } from "../films/film.dto";
 import { PlanetDTO } from "../planets/planet.dto";
 
 @ObjectType('Species')
-@Relation('homeworld', () => PlanetDTO, { description: `A planet that this species originates from.` })
-@FilterableRelation('characters', () => CharacterDTO, { description: `An array of characters that are a part of this species.` })
-@FilterableRelation('films', () => FilmDTO, { description: `An array of Films that this species has appeared in.` })
+@FilterableRelation('homeworld', () => PlanetDTO, { description: `A planet that this species originates from.` })
+@FilterableUnPagedRelation('characters', () => CharacterDTO, { description: `An array of characters that are a part of this species.` })
+@FilterableUnPagedRelation('films', () => FilmDTO, { description: `An array of Films that this species has appeared in.` })
 export class SpeciesDTO {
   @IDField(() => ID)
   id: string;

@@ -14,7 +14,13 @@ type Character {
   eyeColor: String!
 
   """An array of films that this character has been in."""
-  films: Film!
+  films(
+    """Specify to filter the records returned."""
+    filter: FilmFilter! = {}
+
+    """Specify to sort results."""
+    sorting: [FilmSort!]! = []
+  ): [Film!]!
 
   """
   The gender of this character. Either "Male", "Female" or "unknown", "n/a" if the character does not have a gender.
@@ -43,13 +49,31 @@ type Character {
   skinColor: String!
 
   """An array of species that this character belongs to."""
-  species: Species!
+  species(
+    """Specify to filter the records returned."""
+    filter: SpeciesFilter! = {}
+
+    """Specify to sort results."""
+    sorting: [SpeciesSort!]! = []
+  ): [Species!]!
 
   """An array of starships that this character has piloted."""
-  starships: Starship!
+  starships(
+    """Specify to filter the records returned."""
+    filter: StarshipFilter! = {}
+
+    """Specify to sort results."""
+    sorting: [StarshipSort!]! = []
+  ): [Starship!]!
 
   """An array of vehicles that this character has piloted."""
-  vehicles: Vehicle!
+  vehicles(
+    """Specify to filter the records returned."""
+    filter: VehicleFilter! = {}
+
+    """Specify to sort results."""
+    sorting: [VehicleSort!]! = []
+  ): [Vehicle!]!
 }
 
 type CharacterConnection {
@@ -76,6 +100,7 @@ input CharacterFilter {
   gender: StringFieldComparison
   hairColor: StringFieldComparison
   height: StringFieldComparison
+  homeworld: CharacterFilterPlanetFilter
   id: IDFilterComparison
   mass: StringFieldComparison
   name: StringFieldComparison
@@ -96,6 +121,21 @@ input CharacterFilterFilmFilter {
   producer: StringFieldComparison
   releaseDate: StringFieldComparison
   title: StringFieldComparison
+}
+
+input CharacterFilterPlanetFilter {
+  and: [CharacterFilterPlanetFilter!]
+  climate: StringFieldComparison
+  diameter: StringFieldComparison
+  gravity: StringFieldComparison
+  id: IDFilterComparison
+  name: StringFieldComparison
+  or: [CharacterFilterPlanetFilter!]
+  orbitalPeriod: StringFieldComparison
+  population: StringFieldComparison
+  rotationPeriod: StringFieldComparison
+  surfaceWater: StringFieldComparison
+  terrain: StringFieldComparison
 }
 
 input CharacterFilterSpeciesFilter {
@@ -186,7 +226,13 @@ input CursorPaging {
 
 type Film {
   """An array of characters that are in this film."""
-  characters: Character!
+  characters(
+    """Specify to filter the records returned."""
+    filter: CharacterFilter! = {}
+
+    """Specify to sort results."""
+    sorting: [CharacterSort!]! = []
+  ): [Character!]!
 
   """The name of the director of this film."""
   director: String!
@@ -199,7 +245,13 @@ type Film {
   openingCrawl: String!
 
   """An array of planets that are in this film."""
-  planets: Planet!
+  planets(
+    """Specify to filter the records returned."""
+    filter: PlanetFilter! = {}
+
+    """Specify to sort results."""
+    sorting: [PlanetSort!]! = []
+  ): [Planet!]!
 
   """The name(s) of the producer(s) of this film. Comma separated."""
   producer: String!
@@ -208,16 +260,34 @@ type Film {
   releaseDate: String!
 
   """An array of species that are in this film."""
-  species: Species!
+  species(
+    """Specify to filter the records returned."""
+    filter: SpeciesFilter! = {}
+
+    """Specify to sort results."""
+    sorting: [SpeciesSort!]! = []
+  ): [Species!]!
 
   """An array of starships that are in this film."""
-  starships: Starship!
+  starships(
+    """Specify to filter the records returned."""
+    filter: StarshipFilter! = {}
+
+    """Specify to sort results."""
+    sorting: [StarshipSort!]! = []
+  ): [Starship!]!
 
   """The title of this film."""
   title: String!
 
   """An array of vehicles that are in this film."""
-  vehicles: Vehicle!
+  vehicles(
+    """Specify to filter the records returned."""
+    filter: VehicleFilter! = {}
+
+    """Specify to sort results."""
+    sorting: [VehicleSort!]! = []
+  ): [Vehicle!]!
 }
 
 type FilmConnection {
@@ -408,7 +478,13 @@ type Planet {
   diameter: String!
 
   """An array of films that this planet has appeared in."""
-  films: Film!
+  films(
+    """Specify to filter the records returned."""
+    filter: FilmFilter! = {}
+
+    """Specify to sort results."""
+    sorting: [FilmSort!]! = []
+  ): [Film!]!
 
   """
   A number denoting the gravity of this planet, where "1" is normal or 1 standard G. "2" is twice or 2 standard Gs. "0.5" is half or 0.5 standard Gs.
@@ -428,7 +504,13 @@ type Planet {
   population: String!
 
   """An array of characters that live on this planet."""
-  residents: Character!
+  residents(
+    """Specify to filter the records returned."""
+    filter: CharacterFilter! = {}
+
+    """Specify to sort results."""
+    sorting: [CharacterSort!]! = []
+  ): [Character!]!
 
   """
   The number of standard hours it takes for this planet to complete a single rotation on its axis.
@@ -625,7 +707,13 @@ type Species {
   averageLifespan: String!
 
   """An array of characters that are a part of this species."""
-  characters: Character!
+  characters(
+    """Specify to filter the records returned."""
+    filter: CharacterFilter! = {}
+
+    """Specify to sort results."""
+    sorting: [CharacterSort!]! = []
+  ): [Character!]!
 
   """The classification of this species, such as "mammal" or "reptile"."""
   classification: String!
@@ -639,7 +727,13 @@ type Species {
   eyeColors: String!
 
   """An array of Films that this species has appeared in."""
-  films: Film!
+  films(
+    """Specify to filter the records returned."""
+    filter: FilmFilter! = {}
+
+    """Specify to sort results."""
+    sorting: [FilmSort!]! = []
+  ): [Film!]!
 
   """
   A comma-separated string of common hair colors for this species, "none" if this species does not typically have hair.
@@ -688,6 +782,7 @@ input SpeciesFilter {
   eyeColors: StringFieldComparison
   films: SpeciesFilterFilmFilter
   hairColors: StringFieldComparison
+  homeworld: SpeciesFilterPlanetFilter
   id: IDFilterComparison
   language: StringFieldComparison
   name: StringFieldComparison
@@ -719,6 +814,21 @@ input SpeciesFilterFilmFilter {
   producer: StringFieldComparison
   releaseDate: StringFieldComparison
   title: StringFieldComparison
+}
+
+input SpeciesFilterPlanetFilter {
+  and: [SpeciesFilterPlanetFilter!]
+  climate: StringFieldComparison
+  diameter: StringFieldComparison
+  gravity: StringFieldComparison
+  id: IDFilterComparison
+  name: StringFieldComparison
+  or: [SpeciesFilterPlanetFilter!]
+  orbitalPeriod: StringFieldComparison
+  population: StringFieldComparison
+  rotationPeriod: StringFieldComparison
+  surfaceWater: StringFieldComparison
+  terrain: StringFieldComparison
 }
 
 input SpeciesSort {
@@ -761,7 +871,13 @@ type Starship {
   crew: String!
 
   """An array of Films that this starship has appeared in."""
-  films: Film!
+  films(
+    """Specify to filter the records returned."""
+    filter: FilmFilter! = {}
+
+    """Specify to sort results."""
+    sorting: [FilmSort!]! = []
+  ): [Film!]!
 
   """The class of this starships hyperdrive."""
   hyperdriveRating: String!
@@ -790,7 +906,13 @@ type Starship {
   passengers: String!
 
   """An array of characters that this starship has been piloted by."""
-  pilots: Character!
+  pilots(
+    """Specify to filter the records returned."""
+    filter: CharacterFilter! = {}
+
+    """Specify to sort results."""
+    sorting: [CharacterSort!]! = []
+  ): [Character!]!
 
   """
   The class of this starship, such as "Starfighter" or "Deep Space Mobile Battlestation".
@@ -917,7 +1039,13 @@ type Vehicle {
   crew: String!
 
   """An array of Films that this vehicle has appeared in."""
-  films: Film!
+  films(
+    """Specify to filter the records returned."""
+    filter: FilmFilter! = {}
+
+    """Specify to sort results."""
+    sorting: [FilmSort!]! = []
+  ): [Film!]!
   id: ID!
 
   """The length of this vehicle in meters."""
@@ -943,7 +1071,13 @@ type Vehicle {
   passengers: String!
 
   """An array of characters that this vehicle has been piloted by."""
-  pilots: Character!
+  pilots(
+    """Specify to filter the records returned."""
+    filter: CharacterFilter! = {}
+
+    """Specify to sort results."""
+    sorting: [CharacterSort!]! = []
+  ): [Character!]!
 
   """The class of this vehicle, such as "Wheeled" or "Repulsorcraft"."""
   vehicleClass: String!
