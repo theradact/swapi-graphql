@@ -3,20 +3,64 @@ services:
   cache:
     image: redis:6.2-alpine
     restart: always
+    healthcheck:
+      test: redis-cli ping | grep PONG
+      interval : 1s
+      timeout : 1s
+      retries : 20
     ports:
-      - '6379:6379'
+      - 6379:6379
+    networks:
+      - app
+    extra_hosts:
+      - host.docker.internal:host-gateway
     volumes: 
       - cache:/data
+
   postgres:
-    image: "postgres:11.5"
+    image: postgres:11.5
+    restart: always
+    env_file: .env
+    healthcheck:
+      test: pg_isready --quiet --dbname=${DB_NAME} --username=${DB_USERNAME} --port=${DB_PORT}
+      interval : 1s
+      timeout : 1s
+      retries : 20
     environment:
-      - "POSTGRES_USER=swgraphql"
-      - "POSTGRES_DB=swgraphql"
-      - "POSTGRES_PASSWORD=swgraphql"
-    expose:
-      - "5432"
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - PGPORT=${DB_PORT}
     ports:
-      - "5432:5432"
+      - ${DB_PORT}:${DB_PORT}
+    networks:
+      - app
+    extra_hosts:
+      - host.docker.internal:host-gateway
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /app
+    networks:
+      - app
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    ports:
+      - 3000:3000
+    depends_on:
+      cache:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    volumes:
+      - .:/app
+      - /app/node_modules
+
 volumes:
   cache:
     driver: local
+
+networks:
+  app:
