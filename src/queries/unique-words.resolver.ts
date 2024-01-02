@@ -60,15 +60,7 @@ export class UniqueWordsResolver {
       return uniqueWord;
     });
 
-    uniqueWords.sort((a, b) => {
-      if (a.occurences < b.occurences) {
-        return 1;
-      }
-      if (a.occurences > b.occurences) {
-        return -1;
-      }
-      return 0;
-    });
+    uniqueWords.sort((a, b) => b.occurences - a.occurences);
 
     return uniqueWords;
   }
