@@ -1,7 +1,6 @@
 import { Repository } from 'typeorm';
 import { SwapiService } from '../swapi/swapi.service';
-import { ResourceEntity } from './resource.entity';
-import { ResourceService } from './resource.service';
+import { MappedResource } from './mapped-resource.abstract';
 import { ResourceName } from '../swapi/types';
 
 class MockRepository<T> {
@@ -28,7 +27,7 @@ interface MockEntity {
   test: string;
 }
 
-class TestResourceService extends ResourceService<MockEntity> {
+class TestResourceService extends MappedResource<MockEntity> {
   constructor(
     repository: Repository<MockEntity>,
     swapiService: SwapiService

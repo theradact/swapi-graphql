@@ -1,10 +1,10 @@
 import { Column, Entity, ManyToMany, PrimaryColumn } from 'typeorm';
 import { Character } from '../characters/character.entity';
 import { Film } from '../films/film.entity';
-import { ResourceEntity } from '../resource.entity';
+import { ResourceEntityBase } from '../resource-entity-base.interface';
 
 @Entity()
-export class Vehicle implements ResourceEntity {
+export class Vehicle implements ResourceEntityBase {
   @PrimaryColumn()
   id: string;
 

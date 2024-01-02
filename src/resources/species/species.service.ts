@@ -4,11 +4,11 @@ import { Repository } from "typeorm";
 import { SwapiService } from "../../swapi/swapi.service";
 import { PlanetsService } from "../planets/planets.service";
 import { Species } from "./species.entity";
-import { ResourceService } from "../resource.service";
+import { MappedResource } from "../mapped-resource.abstract";
 import { SpeciesResourceDTO } from "../../swapi/types";
 
 @Injectable()
-export class SpeciesService extends ResourceService<Species> {
+export class SpeciesService extends MappedResource<Species> {
   public constructor(
     @InjectRepository(Species) protected readonly repository: Repository<Species>,
     protected readonly swapiService: SwapiService,

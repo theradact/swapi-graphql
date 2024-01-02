@@ -1,13 +1,13 @@
 import { Film } from '../films/film.entity';
 import { Planet } from '../planets/planet.entity';
-import { ResourceEntity } from '../resource.entity';
+import { ResourceEntityBase } from '../resource-entity-base.interface';
 import { Species } from '../species/species.entity';
 import { Starship } from '../starships/starship.entity';
 import { Vehicle } from '../vehicles/vehicle.entity';
 import { Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryColumn } from 'typeorm';
 
 @Entity()
-export class Character implements ResourceEntity {
+export class Character implements ResourceEntityBase {
   @PrimaryColumn()
   id: string;
 

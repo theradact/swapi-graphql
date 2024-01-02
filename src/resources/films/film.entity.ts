@@ -4,10 +4,10 @@ import { Planet } from '../planets/planet.entity';
 import { Species } from '../species/species.entity';
 import { Starship } from '../starships/starship.entity';
 import { Vehicle } from '../vehicles/vehicle.entity';
-import { ResourceEntity } from '../resource.entity';
+import { ResourceEntityBase } from '../resource-entity-base.interface';
 
 @Entity()
-export class Film implements ResourceEntity {
+export class Film implements ResourceEntityBase {
   @PrimaryColumn()
   id: string;
 

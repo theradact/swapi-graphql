@@ -7,11 +7,11 @@ import { SpeciesService } from "../species/species.service";
 import { StarshipsService } from "../starships/starships.service";
 import { VehiclesService } from "../vehicles/vehicles.service";
 import { Character } from "./character.entity";
-import { ResourceService } from "../resource.service";
+import { MappedResource } from "../mapped-resource.abstract";
 import { PersonResourceDTO } from "../../swapi/types";
 
 @Injectable()
-export class CharactersService extends ResourceService<Character> {
+export class CharactersService extends MappedResource<Character> {
   public constructor(
     @InjectRepository(Character) protected readonly repository: Repository<Character>,
     protected readonly swapiService: SwapiService,

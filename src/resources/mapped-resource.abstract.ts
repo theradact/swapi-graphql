@@ -1,10 +1,10 @@
 import { FindManyOptions, FindOneOptions, FindOptionsWhere, Repository } from "typeorm";
 import { ResourceDTO, ResourceName } from "../swapi/types";
 import { SwapiService } from "../swapi/swapi.service";
-import { ResourceEntity } from "./resource.entity";
+import { ResourceEntityBase } from "./resource-entity-base.interface";
 import merge = require('lodash/merge');
 
-export abstract class ResourceService<Entity extends ResourceEntity> {
+export abstract class MappedResource<Entity extends ResourceEntityBase> {
   /**
    * @param resource Name of the mapped resource on the Star Wars API
    * @param repository TypeORM repository for this resource entity

@@ -3,11 +3,11 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { SwapiService } from "../../swapi/swapi.service";
 import { Starship } from "./starship.entity";
-import { ResourceService } from "../resource.service";
+import { MappedResource } from "../mapped-resource.abstract";
 import { StarshipResourceDTO } from "../../swapi/types";
 
 @Injectable()
-export class StarshipsService extends ResourceService<Starship> {
+export class StarshipsService extends MappedResource<Starship> {
   public constructor(
     @InjectRepository(Starship) protected readonly repository: Repository<Starship>,
     protected readonly swapiService: SwapiService,

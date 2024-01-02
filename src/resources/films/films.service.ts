@@ -8,11 +8,11 @@ import { PlanetsService } from "../planets/planets.service";
 import { SpeciesService } from "../species/species.service";
 import { StarshipsService } from "../starships/starships.service";
 import { VehiclesService } from "../vehicles/vehicles.service";
-import { ResourceService } from "../resource.service";
+import { MappedResource } from "../mapped-resource.abstract";
 import { FilmResourceDTO } from "../../swapi/types";
 
 @Injectable()
-export class FilmsService extends ResourceService<Film> {
+export class FilmsService extends MappedResource<Film> {
   public constructor(
     @InjectRepository(Film) protected readonly repository: Repository<Film>,
     protected readonly swapiService: SwapiService,

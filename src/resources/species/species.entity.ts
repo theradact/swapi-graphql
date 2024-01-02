@@ -2,10 +2,10 @@ import { Column, Entity, ManyToMany, ManyToOne, PrimaryColumn } from 'typeorm';
 import { Character } from '../characters/character.entity';
 import { Film } from '../films/film.entity';
 import { Planet } from '../planets/planet.entity';
-import { ResourceEntity } from '../resource.entity';
+import { ResourceEntityBase } from '../resource-entity-base.interface';
 
 @Entity()
-export class Species implements ResourceEntity {
+export class Species implements ResourceEntityBase {
   @PrimaryColumn()
   id: string;
 
