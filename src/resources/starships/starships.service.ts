@@ -1,22 +1,22 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { FindManyOptions, Repository } from "typeorm";
+import { Repository } from "typeorm";
 import { SwapiService } from "../../swapi/swapi.service";
-import { StarshipResourceDto } from "../../swapi/types";
 import { Starship } from "./starship.entity";
-import { PopulateableService } from "../../populate/populate.service";
+import { ResourceService } from "../resource.service";
+import { StarshipResourceDTO } from "../../swapi/types";
 
 @Injectable()
-export class StarshipsService implements PopulateableService {
-  readonly name = 'Starships';
-
+export class StarshipsService extends ResourceService<Starship> {
   public constructor(
-    @InjectRepository(Starship) private readonly starshipRepository: Repository<Starship>,
-    private readonly swapiService: SwapiService
-  ) { }
+    @InjectRepository(Starship) protected readonly repository: Repository<Starship>,
+    protected readonly swapiService: SwapiService,
+  ) {
+    super('starships', repository, swapiService);
+  }
 
-  private async create(starship: StarshipResourceDto) {
-    return this.starshipRepository.create({
+  protected async create(starship: StarshipResourceDTO) {
+    return this.repository.create({
       id: starship.url,
       name: starship.name,
       model: starship.model,
@@ -32,25 +32,5 @@ export class StarshipsService implements PopulateableService {
       cargoCapacity: starship.cargo_capacity,
       consumables: starship.consumables,
     });
-  }
-
-  public async findAll(options?: FindManyOptions<Starship>) {
-    return this.starshipRepository.find();
-  }
-
-  public async findByID(id: string) {
-    return this.starshipRepository.findOne({ where: { id } });
-  }
-
-  public async populate() {
-    const allSWAPIStarships = await this.swapiService.getAll('starships');
-
-    const allStarships = await Promise.all(allSWAPIStarships.map(this.create, this));
-
-    await this.starshipRepository.save(allStarships);
-  }
-
-  public async clear() {
-    await this.starshipRepository.delete({});
   }
 }

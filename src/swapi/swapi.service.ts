@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { PaginatedResponse, ResourceDto, ResourceName } from './types';
+import { PaginatedResponse, ResourceDTO, ResourceName } from './types';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Cache } from 'cache-manager';
 
@@ -75,13 +75,13 @@ export class SwapiService {
     return matches[0];
   }
 
-  private transformResource<RName extends ResourceName>(resource: ResourceDto<RName>) {
+  private transformResource<RName extends ResourceName>(resource: ResourceDTO<RName>) {
     const transformed = Object.fromEntries(
       Object.entries(resource).map(([key, value]) => {
         const newValue = this.ifAPIUrlReplaceWithID(value);
         return [key, newValue];
       })
-    ) as ResourceDto<RName>;
+    ) as ResourceDTO<RName>;
 
     return transformed;
   }

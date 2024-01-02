@@ -1,22 +1,22 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { FindManyOptions, Repository } from "typeorm";
+import { Repository } from "typeorm";
 import { SwapiService } from "../../swapi/swapi.service";
-import { VehicleResourceDto } from "../../swapi/types";
 import { Vehicle } from "./vehicle.entity";
-import { PopulateableService } from "../../populate/populate.service";
+import { ResourceService } from "../resource.service";
+import { VehicleResourceDTO } from "../../swapi/types";
 
 @Injectable()
-export class VehiclesService implements PopulateableService {
-  readonly name = 'Vehicles';
-
+export class VehiclesService extends ResourceService<Vehicle> {
   public constructor(
-    @InjectRepository(Vehicle) private readonly vehicleRepository: Repository<Vehicle>,
-    private readonly swapiService: SwapiService
-  ) { }
+    @InjectRepository(Vehicle) protected readonly repository: Repository<Vehicle>,
+    protected readonly swapiService: SwapiService,
+  ) {
+    super('vehicles', repository, swapiService);
+  }
 
-  private async create(vehicle: VehicleResourceDto) {
-    return this.vehicleRepository.create({
+  protected async create(vehicle: VehicleResourceDTO) {
+    return this.repository.create({
       id: vehicle.url,
       name: vehicle.name,
       model: vehicle.model,
@@ -30,25 +30,5 @@ export class VehiclesService implements PopulateableService {
       cargoCapacity: vehicle.cargo_capacity,
       consumables: vehicle.consumables,
     });
-  }
-
-  public async findAll(options?: FindManyOptions<Vehicle>) {
-    return this.vehicleRepository.find();
-  }
-
-  public async findByID(id: string) {
-    return this.vehicleRepository.findOne({ where: { id } });
-  }
-
-  public async populate() {
-    const allSWAPIvehicles = await this.swapiService.getAll('vehicles');
-
-    const allvehicles = await Promise.all(allSWAPIvehicles.map(this.create, this));
-
-    await this.vehicleRepository.save(allvehicles);
-  }
-
-  public async clear() {
-    await this.vehicleRepository.delete({});
   }
 }

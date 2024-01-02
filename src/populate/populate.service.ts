@@ -7,12 +7,6 @@ import { StarshipsService } from '../resources/starships/starships.service';
 import { VehiclesService } from '../resources/vehicles/vehicles.service';
 import ProgressBar = require("progress");
 
-export interface PopulateableService {
-  readonly name: string;
-  populate: () => Promise<void>;
-  clear: () => Promise<void>;
-}
-
 @Injectable()
 export class PopulateService {
   public constructor(
@@ -24,16 +18,26 @@ export class PopulateService {
     private readonly vehiclesService: VehiclesService,
   ) { }
 
+  /**
+   * Logs a message along with the date and adds formatting
+   * @param message text to log
+   */
   private log(message: string) {
     const dateString = (new Date()).toLocaleString();
     console.log(`[${dateString}] \x1b[1m\x1b[34m${message}\x1b[0m`);
   }
 
+  /**
+   * Synchronizes database with data from StarWars API
+   */
   public async populate() {
     this.log(`Started Star Wars API data synchronization.`);
 
     await this.clear();
 
+    // TODO: Figure this out
+    // sadly this does not work with docker-compose up as we would need pseudo tty
+    // and with compose all services logs are streamed together 
     const bar = new ProgressBar(`Synchronizing data: [\x1b[32m\x1b[1m:bar\x1b[0m] :percent`, {
       width: 25,
       complete: '■',
@@ -53,6 +57,9 @@ export class PopulateService {
     this.log(`Data synchronization complete.`);
   }
 
+  /**
+   * Removes all resources data
+   */
   private async clear() {
     await Promise.all([
       this.planetsService.clear(),

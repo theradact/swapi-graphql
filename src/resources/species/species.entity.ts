@@ -2,9 +2,10 @@ import { Column, Entity, ManyToMany, ManyToOne, PrimaryColumn } from 'typeorm';
 import { Character } from '../characters/character.entity';
 import { Film } from '../films/film.entity';
 import { Planet } from '../planets/planet.entity';
+import { ResourceEntity } from '../resource.entity';
 
 @Entity()
-export class Species {
+export class Species implements ResourceEntity {
   @PrimaryColumn()
   id: string;
 
@@ -35,12 +36,12 @@ export class Species {
   @Column()
   language: string;
 
-  @ManyToOne(() => Planet, planet => planet, {onDelete:'CASCADE'})
+  @ManyToOne(() => Planet, planet => planet, { onDelete: 'CASCADE' })
   homeworld: Planet;
 
-  @ManyToMany(() => Character, character => character.species, {onDelete:'CASCADE'})
+  @ManyToMany(() => Character, character => character.species, { onDelete: 'CASCADE' })
   characters: Character[];
 
-  @ManyToMany(() => Film, film => film.species, {onDelete:'CASCADE'})
+  @ManyToMany(() => Film, film => film.species, { onDelete: 'CASCADE' })
   films: Film[];
 }

@@ -1,24 +1,24 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { FindManyOptions, Repository } from "typeorm";
+import { Repository } from "typeorm";
 import { SwapiService } from "../../swapi/swapi.service";
-import { SpeciesResourceDto } from "../../swapi/types";
 import { PlanetsService } from "../planets/planets.service";
 import { Species } from "./species.entity";
-import { PopulateableService } from "../../populate/populate.service";
+import { ResourceService } from "../resource.service";
+import { SpeciesResourceDTO } from "../../swapi/types";
 
 @Injectable()
-export class SpeciesService implements PopulateableService {
-  readonly name = 'Species';
-
+export class SpeciesService extends ResourceService<Species> {
   public constructor(
-    @InjectRepository(Species) private readonly speciesRepository: Repository<Species>,
-    private readonly planetsService: PlanetsService,
-    private readonly swapiService: SwapiService
-  ) { }
+    @InjectRepository(Species) protected readonly repository: Repository<Species>,
+    protected readonly swapiService: SwapiService,
+    protected readonly planetsService: PlanetsService,
+  ) {
+    super('species', repository, swapiService);
+  }
 
-  private async create(species: SpeciesResourceDto) {
-    const newSpecies = this.speciesRepository.create({
+  protected async create(species: SpeciesResourceDTO) {
+    const newSpecies = this.repository.create({
       id: species.url,
       name: species.name,
       classification: species.classification,
@@ -34,25 +34,5 @@ export class SpeciesService implements PopulateableService {
     newSpecies.homeworld = await this.planetsService.findByID(species.homeworld);
 
     return newSpecies;
-  }
-
-  public async findAll(options?: FindManyOptions<Species>) {
-    return this.speciesRepository.find();
-  }
-
-  public async findByID(id: string) {
-    return this.speciesRepository.findOne({ where: { id } });
-  }
-
-  public async populate() {
-    const allSWAPISpecies = await this.swapiService.getAll('species');
-
-    const allSpecies = await Promise.all(allSWAPISpecies.map(this.create, this));
-
-    await this.speciesRepository.save(allSpecies);
-  }
-
-  public async clear() {
-    await this.speciesRepository.delete({});
   }
 }

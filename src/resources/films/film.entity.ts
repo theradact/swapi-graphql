@@ -4,9 +4,10 @@ import { Planet } from '../planets/planet.entity';
 import { Species } from '../species/species.entity';
 import { Starship } from '../starships/starship.entity';
 import { Vehicle } from '../vehicles/vehicle.entity';
+import { ResourceEntity } from '../resource.entity';
 
 @Entity()
-export class Film {
+export class Film implements ResourceEntity {
   @PrimaryColumn()
   id: string;
 
@@ -28,23 +29,23 @@ export class Film {
   @Column()
   releaseDate: string;
 
-  @ManyToMany(() => Species, species => species.films, {onDelete:'CASCADE'})
+  @ManyToMany(() => Species, species => species.films, { onDelete: 'CASCADE' })
   @JoinTable({ name: 'film_species' })
   species: Species[];
 
-  @ManyToMany(() => Starship, starship => starship.films, {onDelete:'CASCADE'})
+  @ManyToMany(() => Starship, starship => starship.films, { onDelete: 'CASCADE' })
   @JoinTable({ name: 'film_starships' })
   starships: Starship[];
 
-  @ManyToMany(() => Vehicle, vehicle => vehicle.films, {onDelete:'CASCADE'})
+  @ManyToMany(() => Vehicle, vehicle => vehicle.films, { onDelete: 'CASCADE' })
   @JoinTable({ name: 'film_vehicles' })
   vehicles: Vehicle[];
 
-  @ManyToMany(() => Character, character => character.films, {onDelete:'CASCADE'})
+  @ManyToMany(() => Character, character => character.films, { onDelete: 'CASCADE' })
   @JoinTable({ name: 'film_characters' })
   characters: Character[];
 
-  @ManyToMany(() => Planet, planet => planet.films, {onDelete:'CASCADE'})
+  @ManyToMany(() => Planet, planet => planet.films, { onDelete: 'CASCADE' })
   @JoinTable({ name: 'film_planets' })
   planets: Planet[];
 }

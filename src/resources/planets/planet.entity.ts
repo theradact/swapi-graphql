@@ -1,9 +1,10 @@
 import { Column, Entity, ManyToMany, OneToMany, PrimaryColumn } from 'typeorm';
 import { Character } from '../characters/character.entity';
 import { Film } from '../films/film.entity';
+import { ResourceEntity } from '../resource.entity';
 
 @Entity()
-export class Planet {
+export class Planet implements ResourceEntity {
   @PrimaryColumn()
   id: string;
 
@@ -34,9 +35,9 @@ export class Planet {
   @Column()
   surfaceWater: string;
 
-  @OneToMany(() => Character, character => character.homeworld, {onDelete:'CASCADE'})
+  @OneToMany(() => Character, character => character.homeworld, { onDelete: 'CASCADE' })
   residents: Character[];
 
-  @ManyToMany(() => Film, film => film.planets, {onDelete:'CASCADE'})
+  @ManyToMany(() => Film, film => film.planets, { onDelete: 'CASCADE' })
   films: Film[];
 }

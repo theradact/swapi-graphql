@@ -1,32 +1,32 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { FindManyOptions, Repository } from "typeorm";
+import { Repository } from "typeorm";
 import { Film } from "./film.entity";
 import { SwapiService } from "../../swapi/swapi.service";
-import { FilmResourceDto } from "../../swapi/types";
 import { CharactersService } from "../characters/characters.service";
 import { PlanetsService } from "../planets/planets.service";
 import { SpeciesService } from "../species/species.service";
 import { StarshipsService } from "../starships/starships.service";
 import { VehiclesService } from "../vehicles/vehicles.service";
-import { PopulateableService } from "../../populate/populate.service";
+import { ResourceService } from "../resource.service";
+import { FilmResourceDTO } from "../../swapi/types";
 
 @Injectable()
-export class FilmsService implements PopulateableService {
-  readonly name = 'Films';
-
+export class FilmsService extends ResourceService<Film> {
   public constructor(
-    @InjectRepository(Film) private readonly filmRepository: Repository<Film>,
-    private readonly speciesService: SpeciesService,
-    private readonly starshipsService: StarshipsService,
-    private readonly vehiclesService: VehiclesService,
-    private readonly charactersService: CharactersService,
-    private readonly planetsService: PlanetsService,
-    private readonly swapiService: SwapiService
-  ) { }
+    @InjectRepository(Film) protected readonly repository: Repository<Film>,
+    protected readonly swapiService: SwapiService,
+    protected readonly speciesService: SpeciesService,
+    protected readonly starshipsService: StarshipsService,
+    protected readonly vehiclesService: VehiclesService,
+    protected readonly charactersService: CharactersService,
+    protected readonly planetsService: PlanetsService,
+  ) {
+    super('films', repository, swapiService);
+  }
 
-  private async create(film: FilmResourceDto) {
-    const newFilm = this.filmRepository.create({
+  protected async create(film: FilmResourceDTO) {
+    const newFilm = this.repository.create({
       id: film.url,
       title: film.title,
       episodeID: film.episode_id,
@@ -51,25 +51,5 @@ export class FilmsService implements PopulateableService {
     ]);
 
     return newFilm;
-  }
-
-  public async findAll(options?: FindManyOptions<Film>) {
-    return this.filmRepository.find();
-  }
-
-  public async findByID(id: string) {
-    return this.filmRepository.findOne({ where: { id } });
-  }
-
-  public async populate() {
-    const allSWAPIFilms = await this.swapiService.getAll('films');
-
-    const allFilms = await Promise.all(allSWAPIFilms.map(this.create, this));
-
-    await this.filmRepository.save(allFilms);
-  }
-
-  public async clear() {
-    await this.filmRepository.delete({});
   }
 }
