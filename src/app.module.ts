@@ -13,6 +13,7 @@ import { VehiclesModule } from './resources/vehicles/vehicles.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { PopulateService } from './populate/populate.service';
+import { QueriesModule } from './queries/queries.module';
 import 'dotenv/config';
 
 @Module({
@@ -50,6 +51,7 @@ import 'dotenv/config';
     SpeciesModule,
     StarshipsModule,
     VehiclesModule,
+    QueriesModule,
   ],
   providers: [PopulateService],
 })

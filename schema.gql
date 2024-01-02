@@ -604,6 +604,16 @@ enum PlanetSortFields {
   terrain
 }
 
+"""
+Characters that appears the most often across all of the openings of the film
+"""
+type PrevalentCharacters {
+  characters: [Character!]!
+
+  """A number of times this character occured in all of the film openings."""
+  occurences: Int!
+}
+
 type Query {
   character(
     """The id of the record to find."""
@@ -633,6 +643,16 @@ type Query {
     """Specify to sort results."""
     sorting: [FilmSort!]! = []
   ): FilmConnection!
+
+  """
+  Characters that appears the most often across all of the openings of the film
+  """
+  getFilmOpeningsPrevalentCharacter: PrevalentCharacters!
+
+  """
+  In descending order: An array of pairs of unique words from all films openings paired with their number of occurrences in the text.
+  """
+  getFilmOpeningsUniqueWords: [UniqueWord!]!
   planet(
     """The id of the record to find."""
     id: ID!
@@ -1021,6 +1041,14 @@ input StringFieldComparison {
   notILike: String
   notIn: [String!]
   notLike: String
+}
+
+type UniqueWord {
+  """A number of times this word occured in all of the film openings."""
+  occurences: Int!
+
+  """Unique word from all the film openings."""
+  word: String!
 }
 
 type Vehicle {
