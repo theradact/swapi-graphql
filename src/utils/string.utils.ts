@@ -7,7 +7,7 @@ import escapeRegExp = require("lodash/escapeRegExp");
  * @returns the input string without line breaks
  */
 export function removeLineBreaks(input: string) {
-  return input.replace(/\r?\n|\r/g, " ");
+  return input.replace(/[\r?\n|\r]+/g, " ");
 }
 
 /**
